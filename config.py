@@ -11,6 +11,8 @@ CONTROLLER_DIR  = APP_DIR+"controllers/"
 
 MODEL_DIR       = APP_DIR+"models/"
 
+STATIC_DIR      = APP_DIR+"static"
+
 DATABASE_NAME   = 'data.db'
 
 

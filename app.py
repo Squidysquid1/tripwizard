@@ -4,7 +4,9 @@ from framework.Router import Router
 import config
 
 #Start the app..
-app = Flask(__name__, template_folder=config.VIEWS_DIR)
+app = Flask(__name__, static_url_path='/static', 
+                    static_folder=config.STATIC_DIR,
+                    template_folder=config.VIEWS_DIR)
 
 
 #Confing start...
