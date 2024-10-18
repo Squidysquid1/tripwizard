@@ -15,5 +15,6 @@ STATIC_DIR      = APP_DIR+"static"
 
 DATABASE_NAME   = 'data.db'
 
-
+#change in "production"
+SECRET_KEY="dev"
 

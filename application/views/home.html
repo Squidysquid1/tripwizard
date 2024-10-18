@@ -1,19 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello!</title>
-</head>
-<body>
-  {% include 'common/header.html' %}
-  Hi Home page  <br>
-  {{data.cooler_data}} <br>
+  {% extends 'common/base.html' %}
 
-  {{data.testvar}}
+  {% block title %}Home{% endblock %}
+  
+  {% block content %}
+    Hi Home page  <br>
+    {{data.cooler_data}} <br>
 
-
-  {% include 'common/footer.html' %}
-</body>
-</html>
-
-
+    {{data.testvar}}
+  {% endblock %}
