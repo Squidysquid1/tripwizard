@@ -3,8 +3,24 @@
   {% block title %}Home{% endblock %}
 
   {% block content %}
-    Hi Home page  <br>
+
+  <table border="1">
+    <tr>
+      <td id="frontpageimage">
+        <img src="{{ url_for('static', filename='img/homepage.jpg')}}">
+      </td>
+  
+      <td id="frontpagetext">
+        <div class="frontpagecontent">
+          <h1>TripWizard - The new way to plan a trip!</h1>
+          <p>Click <a>here</a> to learn how it works. </p>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+    <!--Hi Home page  <br>
     {{data.cooler_data}} <br>
 
-    {{data.testvar}}
+    {{data.testvar}}-->
   {% endblock %}
