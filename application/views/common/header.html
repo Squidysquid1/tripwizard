@@ -1,17 +1,18 @@
-<div class="navbar">
-    <div class="logo"><a href="{{ url_for('home_controller.index') }}"><img src="{{ url_for('static', filename='img/logo.jpg')}}"></a></div>
-    <div class="nav-links">
-        <a href="#">Link1</a>
-        <a href="#">Link2</a>
-        <a href="#">Link3</a>
+<header>
+    <div class="navbar">
+        <div class="logo"><a href="{{ url_for('home_controller.index') }}"><img src="{{ url_for('static', filename='img/logo.jpg')}}"></a></div>
+        <div class="nav-links">
+            <a href="#">How It Works</a>
+            <a href="#">New Survey</a>
+        </div>
+        <div class="right-element">
+            {% if g.user %}
+            <!--If the user is already logged in, take the user to where their account information is displayed, they can log out from here.-->
+            <a href="{{ url_for('auth.account') }}" class="button">Account</a>
+            {% else %}
+            <!--If the user is not logged in, take the user to the create account screen. In there, they will have the option to log into a previously existing account instead. -->
+            <a href="{{ url_for('auth.create_acc') }}" class="button">Log In/Create Account</a>
+            {% endif %}
+        </div>
     </div>
-    <div class="right-element">
-        {% if g.user %}
-        <div>{{ g.user['username'] }}</div>
-        <a href="{{ url_for('auth.logout') }}" class="button">Log Out</a>
-        {% else %}
-        <a href="{{ url_for('auth.register') }}" class="button">Register</a>
-        <a href="{{ url_for('auth.login') }}" class="button">Log In</a>
-        {% endif %}
-    </div>
-</div>
+</header>
