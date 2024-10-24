@@ -10,4 +10,4 @@ class Router:
 
         #Index Page!
         from application.routes.HomeRouter import HomeRouter
-        app.create_acc_blueprint(HomeRouter, url_prefix="/")
+        app.register_blueprint(HomeRouter, url_prefix="/")
