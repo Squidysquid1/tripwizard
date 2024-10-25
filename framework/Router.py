@@ -6,7 +6,7 @@ class Router:
         print("Web server starting")
         
         from . import Auth
-        app.create_acc_blueprint(Auth.bp)
+        app.register_blueprint(Auth.bp)
 
         #Index Page!
         from application.routes.HomeRouter import HomeRouter

@@ -1,18 +1,17 @@
 <header>
-    <div class="navbar">
-        <div class="logo"><a href="{{ url_for('home_controller.index') }}"><img src="{{ url_for('static', filename='img/logo.jpg')}}"></a></div>
-        <div class="nav-links">
-            <a href="#">How It Works</a>
-            <a href="#">New Survey</a>
+    <h1 class="maintitle">
+        <div class="pagelinks">
+            TripWizard
         </div>
-        <div class="right-element">
+    </h1>
+       <!-- <div class="right-element">
             {% if g.user %}
-            <!--If the user is already logged in, take the user to where their account information is displayed, they can log out from here.-->
+            
             <a href="{{ url_for('auth.account') }}" class="button">Account</a>
             {% else %}
-            <!--If the user is not logged in, take the user to the create account screen. In there, they will have the option to log into a previously existing account instead. -->
+            
             <a href="{{ url_for('auth.create_acc') }}" class="button">Log In/Create Account</a>
             {% endif %}
         </div>
-    </div>
+    </div>-->
 </header>
