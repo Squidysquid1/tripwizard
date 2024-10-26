@@ -64,14 +64,16 @@ footer {
     padding-top: 20px;
     margin-bottom:0px;
     padding-bottom: 0px;
+    font-size: 30px;
 }
 
 #frontpageimage img{
-    width:50%;
-    height:50%;
+    width:95%;
+    height:95%;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    border-radius: 70px;
 }
 
 table, td {
@@ -83,7 +85,7 @@ header {
     color: white;
     margin-top: 0px;
     font-family: 'Audiowide', sans-serif;
-    padding: 30px;
+    padding: 20px;
 }
 
 h1 {
@@ -96,4 +98,72 @@ h1 {
     font-size: 60px;
     text-align: center;
     font-family: 'Audiowide', sans-serif; 
+    padding-bottom: 5px;
+}
+
+#frontpagetext h1{
+    font-size: 75px;
+}
+
+#frontpagetext p {
+    font-size: 50px;
+}
+
+.footnav {
+    font-size: 30px;
+}
+
+.sublinks {
+    text-align: center;
+    font-size: 25px;
+}
+
+.sublinks a{
+    background-color: #cfe2f3;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid black; 
+}
+
+.accountLink {
+    display: float;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+}
+
+.accountLink a{
+    font-size: 35px;
+    background-color: #cfe2f3;
+    color: black;
+    border-radius: 20px;
+    padding: 10px;
+    border: 2px solid black; 
+}
+
+#createAccountDiv {
+    background-color: #cfe2f3;
+    color: black;
+    border: 2px solid black; 
+    border-radius: 50px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100px;
+    width: 70%;
+}
+
+.accountHeader {
+    font-size: 60px;
+}
+
+formInput {
+    font-size: 25px;
+}
+
+h2 a, h2 a:visited, h2 a:hover, h2 a:active{
+    color: blue;
+    text-decoration: underline;
 }
