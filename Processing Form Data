@@ -1,4 +1,4 @@
-def generate_itinerary():
+'''def generate_itinerary():
    country = request.form.get('country')
    city = request.form.get('city')
    days = request.form.get('days')
@@ -9,3 +9,4 @@ def generate_itinerary():
    itinerary = create_itinerary(country, city, days, categories, busyness)
 
    return render_template('itinerary.html', itinerary=itinerary)
+'''
