@@ -51,13 +51,13 @@ def create_acc():
     password for security.
     """
     if request.method == "POST":
-        username = request.form["username"]
+        email = request.form["email"]
         password = request.form["password"]
         db = get_db()
         error = None
 
-        if not username:
-            error = "Username is required."
+        if not email:
+            error = "Email Address is required."
         elif not password:
             error = "Password is required."
 
@@ -65,13 +65,13 @@ def create_acc():
             try:
                 db.execute(
                     "INSERT INTO User (username, password) VALUES (?, ?)",
-                    (username, generate_password_hash(password)),
+                    (email, generate_password_hash(password)),
                 )
                 db.commit()
             except db.IntegrityError:
                 # The username was already taken, which caused the
                 # commit to fail. Show a validation error.
-                error = f"User {username} is already registered."
+                error = f"User {email} is already registered."
             else:
                 # Success, go to the login page.
                 return redirect(url_for("auth.login"))
@@ -85,16 +85,16 @@ def create_acc():
 def login():
     """Log in a registered user by adding the user id to the session."""
     if request.method == "POST":
-        username = request.form["username"]
+        email = request.form["email"]
         password = request.form["password"]
         db = get_db()
         error = None
         user = db.execute(
-            "SELECT * FROM User WHERE username = ?", (username,)
+            "SELECT * FROM User WHERE username = ?", (email,)
         ).fetchone()
 
         if user is None:
-            error = "Incorrect username."
+            error = "Incorrect email."
         elif not check_password_hash(user["password"], password):
             error = "Incorrect password."
 
