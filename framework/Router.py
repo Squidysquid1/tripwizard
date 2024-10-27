@@ -15,3 +15,7 @@ class Router:
         #How It Works Page
         from application.routes.HowRouter import HowRouter
         app.register_blueprint(HowRouter, url_prefix="/howitworks")
+
+        #Survey Page
+        from application.routes.SurveyRouter import SurveyRouter
+        app.register_blueprint(SurveyRouter, url_prefix="/survey")

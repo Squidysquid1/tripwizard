@@ -142,7 +142,7 @@ h1 {
     border: 2px solid black; 
 }
 
-#createAccountDiv {
+.centralPage {
     background-color: #cfe2f3;
     color: black;
     border: 2px solid black; 
