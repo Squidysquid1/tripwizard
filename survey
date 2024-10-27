@@ -1,0 +1,8 @@
+|-- app.py
+|-- templates/
+   |-- base.html
+   |-- survey.html
+   |-- itinerary.html
+|-- static/
+   |-- css/
+   |-- js/
