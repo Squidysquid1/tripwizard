@@ -167,3 +167,11 @@ h2 a, h2 a:visited, h2 a:hover, h2 a:active{
     color: blue;
     text-decoration: underline;
 }
+
+.subPageHeader {
+    font-size: 60px;
+}
+
+.howWorkscontent {
+    font-size: 18px;
+}

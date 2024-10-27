@@ -14,4 +14,4 @@ class Router:
 
         #How It Works Page
         from application.routes.HowRouter import HowRouter
-        app.register_blueprint(HowRouter, url_prefix="/")
+        app.register_blueprint(HowRouter, url_prefix="/howitworks")
