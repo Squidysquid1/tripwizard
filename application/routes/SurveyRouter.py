@@ -1,6 +1,6 @@
 from flask import Blueprint
-from application.controllers.HowController import HowController
+from application.controllers.SurveyController import SurveyController
 
-HowRouter = Blueprint('how_controller', __name__)
+SurveyRouter = Blueprint('how_controller', __name__)
 
-HowRouter.route('/', methods=['GET'])(HowController.index)
+SurveyRouter.route('/', methods=['GET'])(SurveyController.index)
