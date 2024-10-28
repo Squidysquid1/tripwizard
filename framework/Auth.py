@@ -114,3 +114,16 @@ def logout():
     """Clear the current session, including the stored User id."""
     session.clear()
     return redirect(url_for("home_controller.index"))
+
+'''@bp.route("/survey", methods=("GET", "POST"))
+def generate_itinerary():
+   country = request.form.get('country')
+   city = request.form.get('city')
+   days = request.form.get('days')
+   categories = request.form.getlist('category')
+   busyness = request.form.get('busyness')
+
+   # Implement the logic to generate itinerary based on inputs
+   itinerary = create_itinerary(country, city, days, categories, busyness)
+
+   return render_template('itinerary.html', itinerary=itinerary)'''

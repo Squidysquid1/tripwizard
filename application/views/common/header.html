@@ -1,11 +1,11 @@
 <header>
     <h1 class="maintitle">
         <div class="pagelinks">
-            TripWizard
+            <a href="{{ url_for('home_controller.index') }}">TripWizard</a>
         </div>
     </h1>
     <h1 class="sublinks">
         <a href="{{ url_for('how_controller.index') }}">How It Works</a> &emsp;
-        <a href="#">New Survey</a>
+        <a href="{{ url_for('survey_controller.index') }}">New Survey</a>
     </h1>
 </header>

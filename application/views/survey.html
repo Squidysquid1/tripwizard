@@ -1,13 +1,40 @@
 {% extends 'common/base.html' %}
 
-{% block title %}Create Account{% endblock %}
+{% block title %}Survey{% endblock %}
 
 {% block content %}
 
 <div class="centralPage">
   <h1 class="accountHeader">New Traveler Survey</h1>
   <h2>Fill in this short survey to create a new itinerary.</h2>
-
+  <form action="#" method="post">
+    <label for="country">Which country are you visiting?</label>
+    <input type="text" id="country" name="country">
+ 
+    <label for="city">Which city are you visiting?</label>
+    <input type="text" id="city" name="city">
+ 
+    <label for="days">How many days are you staying?</label>
+    <input type="number" id="days" name="days" max="7">
+ 
+    <fieldset>
+        <legend>Select the categories of sites you would like to see:</legend>
+        <input type="checkbox" id="historical" name="category" value="Historical">
+        <label for="historical">Historical</label>
+        <input type="checkbox" id="nature" name="category" value="Nature">
+        <label for="nature">Nature</label>
+        <!-- Add more categories as needed -->
+    </fieldset>
+ 
+    <label for="busyness">How busy do you want your day(s) to be?</label>
+    <select id="busyness" name="busyness">
+        <option value="1-2">Light</option>
+        <option value="3-4">Medium</option>
+        <option value="5-6">Heavy</option>
+    </select>
+ 
+    <input type="submit" value="Generate Itinerary">
+ </form>
   
   <br>
   <br>
