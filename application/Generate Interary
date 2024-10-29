@@ -1,0 +1,68 @@
+       # Generate itinerary based on survey
+       itinerary = generate_itinerary(survey)
+       
+       return jsonify({'itinerary': itinerary})
+       
+   except Exception as e:
+       return jsonify({'error': str(e)}), 400
+def generate_itinerary(survey):
+   """Generate itinerary based on survey responses"""
+   itinerary = []
+   start_time = datetime.strptime('8:30 AM', '%I:%M %p')
+   
+   # Determine number of sights per day based on intensity
+   sights_per_day = {
+       'light': 2,     # 1-2 sights
+       'moderate': 4,  # 3-4 sights
+       'heavy': 6      # 5-6 sights
+   }
+   
+   daily_sights = sights_per_day[survey.intensity]
+   
+   # Sample attractions (in real app, these would come from database)
+   attractions = {
+       'historical': ['Brandenburg Gate', 'East Side Gallery', 'Checkpoint Charlie'],
+       'nature': ['Tiergarten', 'Treptower Park', 'Botanical Garden'],
+       'family': ['Berlin Zoo', 'Legoland Discovery Centre', 'German Museum of Technology'],
+       'nightlife': ['Berghain', 'Matrix Club', 'Tresor']
+   }
+   
+   # Filter attractions based on selected categories
+   selected_attractions = []
+   if survey.historical:
+       selected_attractions.extend(attractions['historical'])
+   if survey.nature:
+       selected_attractions.extend(attractions['nature'])
+   if survey.family:
+       selected_attractions.extend(attractions['family'])
+   if survey.nightlife:
+       selected_attractions.extend(attractions['nightlife'])
+   
+   # Generate daily schedules
+   for day in range(survey.days):
+       daily_schedule = []
+       current_time = start_time
+       
+       for sight in range(daily_sights):
+           if sight < len(selected_attractions):
+               attraction = selected_attractions[sight]
+               visit_duration = timedelta(hours=2)  # Average visit duration
+               
+               daily_schedule.append({
+                   'time': current_time.strftime('%I:%M %p'),
+                   'attraction': attraction,
+                   'duration': '2 hours'
+               })
+               
+               current_time += visit_duration + timedelta(minutes=30)  # Add travel time
+       
+       itinerary.append({
+           'day': day + 1,
+           'schedule': daily_schedule
+       })
+   
+   return itinerary
+if __name__ == '__main__':
+   with app.app_context():
+       db.create_all()
+   app.run
