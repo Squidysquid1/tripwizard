@@ -175,3 +175,34 @@ h2 a, h2 a:visited, h2 a:hover, h2 a:active{
 .howWorkscontent {
     font-size: 18px;
 }
+
+.buttonContainer button {
+    background-color: #0000ff; 
+    border: 1px solid black; 
+    color: white; 
+    padding: 10px 24px; 
+    cursor: pointer; 
+    float: left; 
+  }
+
+  .buttonContainer:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .buttonContainer button:not(:last-child) {
+    border-right: none; 
+  }
+
+  .buttonContainer button:hover {
+    background-color: #cfe2f3;
+    color: black;
+  }
+
+  .buttonContainer {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Audiowide', sans-serif; 
+  }

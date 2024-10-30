@@ -8,32 +8,49 @@
   <h1 class="accountHeader">New Traveler Survey</h1>
   <h2>Fill in this short survey to create a new itinerary.</h2>
   <form action="#" method="post">
-    <label for="country">Which country are you visiting?</label>
-    <input type="text" id="country" name="country">
+    <!--Arbitrary for now, but in the future this will filter the city dropdown menu. -->
+    <label for="country">Which country are you visiting? </label>
+    <select name="country" id="country">
+    <option value="germany">Germany</option>
+    </select>
+
+    <br><br>
  
-    <label for="city">Which city are you visiting?</label>
-    <input type="text" id="city" name="city">
+    <label for="city">Which city are you visiting? </label>
+    <select name="city" id="city">
+    <option value="berlin">Berlin</option>
+    </select>
+
+    <br><br>
  
-    <label for="days">How many days are you staying?</label>
-    <input type="number" id="days" name="days" max="7">
+    <label for="days">How many days are you staying? (max. 4)</label>
+    <input type="number" id="days" name="days" max="4">
  
+    <br><br>
+
     <fieldset>
         <legend>Select the categories of sites you would like to see:</legend>
         <input type="checkbox" id="historical" name="category" value="Historical">
         <label for="historical">Historical</label>
         <input type="checkbox" id="nature" name="category" value="Nature">
         <label for="nature">Nature</label>
-        <!-- Add more categories as needed -->
+        <input type="checkbox" id="family" name="category" value="Family">
+        <label for="family">Family</label>
+        <input type="checkbox" id="nightlife" name="category" value="nightlife">
+        <label for="nightlife">Night Life</label>
     </fieldset>
+
+    <br><br>
  
     <label for="busyness">How busy do you want your day(s) to be?</label>
-    <select id="busyness" name="busyness">
-        <option value="1-2">Light</option>
-        <option value="3-4">Medium</option>
-        <option value="5-6">Heavy</option>
-    </select>
+
+    <div class="buttonContainer" style="width:50%">
+      <button style="width:33.3%">Light</button>
+      <button style="width:33.3%">Moderate</button>
+      <button style="width:33.3%">Heavy</button>
+    </div>
  
-    <input type="submit" value="Generate Itinerary">
+    <!--<input type="submit" value="Generate Itinerary">-->
  </form>
   
   <br>
