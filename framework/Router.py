@@ -19,3 +19,8 @@ class Router:
         #Survey Page
         from application.routes.SurveyRouter import SurveyRouter
         app.register_blueprint(SurveyRouter, url_prefix="/survey")
+
+
+        #Itinerary Page
+        from application.routes.ItineraryRouter import ItineraryRouter
+        app.register_blueprint(ItineraryRouter, url_prefix="/itinerary")

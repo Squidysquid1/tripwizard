@@ -206,3 +206,37 @@ h2 a, h2 a:visited, h2 a:hover, h2 a:active{
     margin-right: auto;
     font-family: 'Audiowide', sans-serif; 
   }
+
+  .itinTable {
+    border: 2px solid black; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 97%;
+  }
+
+  .timeSec {
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .itinTable tr, .itinTable td {
+    border: 0px solid black;
+  }
+
+  .itinTab {
+    width: 80%;
+    font-size: 24px;
+    padding: 10px;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .address {
+    font-size: 16px;
+    color: grey;
+  }
