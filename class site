@@ -1,0 +1,27 @@
+class Site:
+    def __init__(self, time, name, price, description, address, category):
+        self.time = time
+        self.name = name
+        self.price = price
+        self.description = description
+        self.address = address
+        self.category = category
+
+class Day:
+    def __init__(self, sites=None):
+        self.sites = sites if sites else [None] * 6  # List to hold six Site objects
+
+    def get_site(self, index):
+        return self.sites[index] if 0 <= index < len(self.sites) else None
+
+class Itinerary:
+    def __init__(self, d1, d2, d3, d4):
+        self.d1 = d1
+        self.d2 = d2
+        self.d3 = d3
+        self.d4 = d4
+
+def randomize_sites(sites, num_days=4):
+    random.shuffle(sites)
+    days = [Day(sites[i*6:(i+1)*6]) for i in range(num_days)]
+    return Itinerary(*days)
