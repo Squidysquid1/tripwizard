@@ -400,8 +400,8 @@ def generate_itinerary(berlin_sites):
         cat = i.get_category()
         if cat in checked:
             my_sites.append(i)
-    for i in my_sites:
-        print(i.get_name())
+
+        
     '''This is where the itinerary is generated.'''
 
     totsites = len(my_sites)
@@ -409,21 +409,21 @@ def generate_itinerary(berlin_sites):
     if days == 1:
         myPickedSites = []
         if busyness == "heavy":
-            for i in range (1, 6):
+            for i in range (1, 7):
                 '''Six sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
         elif busyness == "moderate":
-            for i in range (1, 4):
+            for i in range (1, 5):
                 '''Four sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
         elif busyness == "light":
-            for i in range (1, 4):
+            for i in range (1, 3):
                 '''Two sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -433,7 +433,7 @@ def generate_itinerary(berlin_sites):
     elif days == 2:
         myPickedSites = []
         if busyness == "heavy":
-            for i in range (1, 12):
+            for i in range (1, 13):
                 '''Six sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -441,7 +441,7 @@ def generate_itinerary(berlin_sites):
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
             d2 = day(myPickedSites[6], myPickedSites[7], myPickedSites[8], myPickedSites[9], myPickedSites[10], myPickedSites[11])
         elif busyness == "moderate":
-            for i in range (1, 8):
+            for i in range (1, 9):
                 '''Four sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -449,7 +449,7 @@ def generate_itinerary(berlin_sites):
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
             d2 = day(myPickedSites[4], myPickedSites[5], myPickedSites[6], myPickedSites[7], 0, 0)
         elif busyness == "light":
-            for i in range (1, 4):
+            for i in range (1, 5):
                 '''Two sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -460,7 +460,7 @@ def generate_itinerary(berlin_sites):
     elif days == 3:
         myPickedSites = []
         if busyness == "heavy":
-            for i in range (1, 18):
+            for i in range (1, 19):
                 '''Six sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -469,8 +469,9 @@ def generate_itinerary(berlin_sites):
             d2 = day(myPickedSites[6], myPickedSites[7], myPickedSites[8], myPickedSites[9], myPickedSites[10], myPickedSites[11])
             d3 = day(myPickedSites[12], myPickedSites[13], myPickedSites[14], myPickedSites[15], myPickedSites[16], myPickedSites[17])
         elif busyness == "moderate":
-            for i in range (1, 12):
+            for i in range (1, 13):
                 '''Four sites in a day'''
+                totsites = totsites - 1
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
@@ -479,7 +480,7 @@ def generate_itinerary(berlin_sites):
             d3 = day(myPickedSites[8], myPickedSites[9], myPickedSites[10], myPickedSites[11], 0, 0)
 
         elif busyness == "light":
-            for i in range (1, 6):
+            for i in range (1, 7):
                 '''Two sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -491,7 +492,7 @@ def generate_itinerary(berlin_sites):
     elif days == 4:
         myPickedSites = []
         if busyness == "heavy":
-            for i in range (1, 24):
+            for i in range (1, 25):
                 '''Six sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -501,7 +502,7 @@ def generate_itinerary(berlin_sites):
             d3 = day(myPickedSites[12], myPickedSites[13], myPickedSites[14], myPickedSites[15], myPickedSites[16], myPickedSites[17])
             d4 = day(myPickedSites[18], myPickedSites[19], myPickedSites[20], myPickedSites[21], myPickedSites[22], myPickedSites[23])
         elif busyness == "moderate":
-            for i in range (1, 16):
+            for i in range (1, 17):
                 '''Four sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -511,7 +512,7 @@ def generate_itinerary(berlin_sites):
             d3 = day(myPickedSites[8], myPickedSites[9], myPickedSites[10], myPickedSites[11], 0, 0)
             d4 = day(myPickedSites[12], myPickedSites[13], myPickedSites[14], myPickedSites[15], 0, 0)
         elif busyness == "light":
-            for i in range (1, 8):
+            for i in range (1, 9):
                 '''Two sites in a day'''
                 randselect = random.randint(1, totsites)
                 myPickedSites.append(my_sites[randselect])
@@ -521,5 +522,3 @@ def generate_itinerary(berlin_sites):
             d3 = day(myPickedSites[4], myPickedSites[5], 0, 0, 0, 0)
             d4 = day(myPickedSites[6], myPickedSites[7], 0, 0, 0, 0)
         myItinerary = itinerary(d1, d2, d3, d4)
-
-generate_itinerary(berlin_sites)
