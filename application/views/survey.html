@@ -7,14 +7,7 @@
 <div class="centralPage">
   <h1 class="accountHeader">New Traveler Survey</h1>
   <h2>Fill in this short survey to create a new itinerary.</h2>
-  <form action="#" method="post">
-    <!--Arbitrary for now, but in the future this will filter the city dropdown menu. -->
-    <label for="country">Which country are you visiting? </label>
-    <select name="country" id="country">
-    <option value="germany">Germany</option>
-    </select>
-
-    <br><br>
+  <form action="/generate_itinerary" method="POST">
  
     <label for="city">Which city are you visiting? </label>
     <select name="city" id="city">
@@ -44,13 +37,13 @@
  
     <label for="busyness">How busy do you want your day(s) to be?</label>
 
-    <div class="buttonContainer" style="width:50%">
-      <button style="width:33.3%">Light</button>
-      <button style="width:33.3%">Moderate</button>
-      <button style="width:33.3%">Heavy</button>
-    </div>
+    <input type="radio" name="busyness" value="light">Light
+    <input type="radio" name="busyness" value="moderate">Moderate
+    <input type="radio" name="busyness" value="heavy">Heavy
  
-    <a href="{{ url_for('itinerary_controller.index') }}">Generate Itinerary</a>
+
+    <br><br>
+    <input type="submit" value="Generate Itinerarary">
  </form>
   
   <br>
