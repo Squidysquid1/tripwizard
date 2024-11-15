@@ -7,11 +7,15 @@
 <div class="centralPage">
   <h1 class="accountHeader">New Traveler Survey</h1>
   <h2>Fill in this short survey to create a new itinerary.</h2>
-  <form action="/generate_itinerary" method="POST">
+  <form action="/makeAnItinerary" method="POST">
  
     <label for="city">Which city are you visiting? </label>
     <select name="city" id="city">
+    <option value="select">Please Select</option>
     <option value="berlin">Berlin</option>
+    <option value="krakow">Krakow</option>
+    <option value="venice">Venice</option>
+    <option value="amsterdam">Amsterdam</option>
     </select>
 
     <br><br>
