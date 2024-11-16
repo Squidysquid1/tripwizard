@@ -217,14 +217,6 @@ class itinerary():
             '''Dont do anything, there's only one day'''
         return str
 
-'''s1 = site("1", "site 1", 150, 1, "address 1", "generic")
-s2 = site("2", "site 2", 75, 1, "address 2", "generic")
-s3 = site("3", "site 3", 125, 1, "address 3", "generic")
-s4 = site("4", "site 4", 200, 1, "address 4", "generic")
-s5 = site("5", "site 5", 50, 1, "address 5", "generic")
-s6 = site("6", "site 6", 100, 1, "address 6", "generic")
-d1 = day(s1, s2, s3, s4, s5, s6)
-'''
 berlin_sites = []
 empSite = site("Empty Site", "This Site is Empty", 100, 0, "No Address", "historical")
 num = 100 
@@ -233,7 +225,7 @@ while num2 < num:
     berlin_sites.append(empSite)
     num += 1
 
-@app.route('/makeNewItinerary', methods=['GET', 'POST'])
+@app.route('/makeNewItinerary', methods=['POST'])
 def makeNewItinerary():
     if request.method == 'POST':
         city = request.form['city']
