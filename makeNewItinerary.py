@@ -225,6 +225,13 @@ s5 = site("5", "site 5", 50, 1, "address 5", "generic")
 s6 = site("6", "site 6", 100, 1, "address 6", "generic")
 d1 = day(s1, s2, s3, s4, s5, s6)
 '''
+berlin_sites = []
+empSite = site("Empty Site", "This Site is Empty", 100, 0, "No Address", "historical")
+num = 100 
+num2 = 0
+while num2 < num:
+    berlin_sites.append(empSite)
+    num += 1
 
 @app.route('/', methods=['GET', 'POST'])
 def makeNewItinerary():
@@ -233,8 +240,6 @@ def makeNewItinerary():
         checked = request.form.getlist('checkbox')
         days = int(request.form['days'])
         busyness = request.form['busyness']
-
-        
 
         def generate_itinerary(site_list, daynum, howBusy, checkboxes):
             '''This function generates a random itinerary for the user.'''

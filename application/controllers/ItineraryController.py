@@ -6,5 +6,5 @@ class ItineraryController:
         data = {}
  
 
-        return render_template('itinerary.html', data=data)
+        return render_template('itinerary.html')
       
