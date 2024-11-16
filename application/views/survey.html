@@ -7,7 +7,7 @@
 <div class="centralPage">
   <h1 class="accountHeader">New Traveler Survey</h1>
   <h2>Fill in this short survey to create a new itinerary.</h2>
-  <form action="{{ url_for('makeNewItinerary.makeNewItinerary') }}" method="POST">
+  <form action="tripwizard/makeNewItinerary.py" method="POST">
  
     <label for="city">Which city are you visiting? </label>
     <select name="city" id="city">
