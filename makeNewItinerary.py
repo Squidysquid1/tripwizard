@@ -137,59 +137,53 @@ class day():
             
 
     def fullDayInformation(self):
-        happening = "Leave Hotel and go to " + self.__s1.get_name() + ". \n"
-        print(happening)
         time = 850
-        '''Leave hotel at 8:30'''
-        '''Add a place to display time'''
-        self.time_converter(time)
-
+        happening = str(self.time_converter(time))
+        happening += "\t\t"
+        happening += "Leave Hotel and go to " + self.__s1.get_name() + ". \n"
+        time += 50
         
-        happening = "\nArrive at " + self.__s1.get_name() + ". \n"
-        print(happening)
+        '''happening = "\nArrive at " + self.__s1.get_name() + ". \n"
         siteOneTime = self.__s1.get_time()
         time += siteOneTime
-        self.time_converter(time)
-        '''site two accounted for'''
+        self.time_converter(time)'''
 
-        happening = "\nArrive at " + self.__s2.get_name() + ". \n"
-        print(happening)
-        siteTwoTime = self.__s2.get_time()
-        time += siteTwoTime
-        self.time_converter(time)
-        '''site 2 accounted for'''
+        happening += str(self.time_converter(time))
+        happening += "\nArrive at " + self.__s1.get_name() + ". \n"
+        happening += self.__s1.get_desc
+        happening += "\n\n"
+        time += self.__s1.get_time()
+
+        happening += str(self.time_converter(time))
+        happening += "\nArrive at " + self.__s2.get_name() + ". \n"
+        happening += self.__s2.get_desc
+        happening += "\n\n"
+        time += self.__s2.get_time() 
 
         if self.__s3 != 0:
-            happening = "\nArrive at " + self.__s3.get_name() + ". \n"
-            print(happening)
-            siteThreeTime = self.__s3.get_time()
-            time += siteThreeTime
-            self.time_converter(time)
-            '''site 3 accounted for'''
+            happening += str(self.time_converter(time))
+            happening += "\nArrive at " + self.__s3.get_name() + ". \n"
+            happening += self.__s3.get_desc
+            happening += "\n\n"
+            time += self.__s3.get_time()
             if self.__s4 != 0:
-                happening = "\nArrive at " + self.__s4.get_name() + ". \n"
-                print(happening)
-                siteFourTime = self.__s4.get_time()
-                time += siteFourTime
-                self.time_converter(time)
-                '''site 4 accounted for'''
+                happening += str(self.time_converter(time))
+                happening += "\nArrive at " + self.__s4.get_name() + ". \n"
+                happening += self.__s4.get_desc
+                happening += "\n\n"
+                time += self.__s4.get_time()
                 if self.__s5 != 0:
-                    happening = "\nArrive at " + self.__s5.get_name() + ". \n"
-                    print(happening)
-                    siteFiveTime = self.__s5.get_time()
-                    time += siteFiveTime
-                    self.time_converter(time)
-                    '''site 5 accounted for'''
+                    happening += str(self.time_converter(time))
+                    happening += "\nArrive at " + self.__s5.get_name() + ". \n"
+                    happening += self.__s5.get_desc
+                    happening += "\n\n"
+                    time += self.__s5.get_time()
                     if self.__s6 != 0:
-                        happening = "\nArrive at " + self.__s6.get_name() + ". \n"
-                        
-                        happening = "\nArrive at " + self.__s6.get_name() + ". \n"
-                        print(happening)
-                        siteSixTime = self.__s6.get_time()
-                        time += siteSixTime
-                        self.time_converter(time)
-                        '''site 6 accounted for'''
-
+                        happening += str(self.time_converter(time))
+                        happening += "\nArrive at " + self.__s6.get_name() + ". \n"
+                        happening += self.__s6.get_desc
+                        happening += "\n\n"
+                        time += self.__s6.get_time()
                     else:
                         '''no site 6, no more time adjustments'''
                 else:
@@ -198,7 +192,8 @@ class day():
                 '''no site 4, no more time adjustments'''
         else:
             '''no site 3, no more time adjustments'''
-        
+        return happening
+    
 class itinerary():
     def __init__(self, day1, day2, day3, day4):
         self.__d1 = day1
@@ -207,15 +202,20 @@ class itinerary():
         self.__d4 = day4
 
     def printFullItinerary(self):
-        print(self.__d1.fullDayInformation())
+        str = "Day 1: \n"
+        str += self.__d1.fullDayInformation()
         if self.__d2 != 0:
-            print(self.__d2.fullDayInformation())
+            str += "\n\nDay 2: \n"
+            str += self.__d2.fullDayInformation()
             if self.__d3 != 0:
-                print(self.__d3.fullDayInformation())
+                str += "\n\nDay 3: \n"
+                str += self.__d3.fullDayInformation()
                 if self.__d4 != 0:
-                    print(self.__d4.fullDayInformation())
+                    str += "\n\nDay 4: \n"
+                    str += self.__d4.fullDayInformation()
         else:
             '''Dont do anything, there's only one day'''
+        return str
 
 '''s1 = site("1", "site 1", 150, 1, "address 1", "generic")
 s2 = site("2", "site 2", 75, 1, "address 2", "generic")
@@ -374,8 +374,10 @@ def makeNewItinerary():
 
         if city == "berlin":
             createdItinerary = generate_itinerary(berlin_sites, days, busyness, checked)
+            itin = createdItinerary.printFullItinerary()
 
-        return render_template('itinerary.html')
+        itin = createdItinerary.printFullItinerary()
+        return render_template('itinerary.html', itin=itin)
     else:
         return render_template('survey.html')
 
