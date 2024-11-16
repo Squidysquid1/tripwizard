@@ -233,7 +233,7 @@ while num2 < num:
     berlin_sites.append(empSite)
     num += 1
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/makeNewItinerary', methods=['GET', 'POST'])
 def makeNewItinerary():
     if request.method == 'POST':
         city = request.form['city']
