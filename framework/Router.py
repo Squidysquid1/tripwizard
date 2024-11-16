@@ -10,7 +10,7 @@ class Router:
 
         #Home Page
         from application.routes.HomeRouter import HomeRouter
-        app.register_blueprint(HomeRouter, url_prefix="/home")
+        app.register_blueprint(HomeRouter, url_prefix="/")
 
         #How It Works Page
         from application.routes.HowRouter import HowRouter
@@ -23,4 +23,4 @@ class Router:
 
         #Itinerary Page
         from application.routes.ItineraryRouter import ItineraryRouter
-        app.register_blueprint(ItineraryRouter, url_prefix="/")
+        app.register_blueprint(ItineraryRouter, url_prefix="/itin")
