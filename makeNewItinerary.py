@@ -14,10 +14,12 @@ class site():
       self.__category = siteCategory
 
   def get_name(self):
-      return self.__name
+      stri = str(self.__name)
+      return stri
 
   def get_desc(self):
-      return self.__desc
+      stri = str(self.__desc)
+      return stri
 
   def get_time(self):
       return self.__time
@@ -134,7 +136,8 @@ class day():
                     minute = "08"
                 elif numMinute2 == 9:
                     minute = "09"
-            print(str(hour) + ":" + str(minute))
+        time = str(hour) + ":" + str(minute) + ":"
+        return time
             
 
     def fullDayInformation(self):
@@ -151,38 +154,44 @@ class day():
 
         happening += str(self.time_converter(time))
         happening += "\nArrive at " + self.__s1.get_name() + ". \n"
-        happening += self.__s1.get_desc
+        s1desc = self.__s1.get_desc()
+        happening += s1desc
         happening += "\n\n"
         time += self.__s1.get_time()
 
         happening += str(self.time_converter(time))
         happening += "\nArrive at " + self.__s2.get_name() + ". \n"
-        happening += self.__s2.get_desc
+        s2desc = self.__s2.get_desc()
+        happening += s2desc
         happening += "\n\n"
         time += self.__s2.get_time() 
 
         if self.__s3 != 0:
             happening += str(self.time_converter(time))
             happening += "\nArrive at " + self.__s3.get_name() + ". \n"
-            happening += self.__s3.get_desc
+            s3desc = self.__s3.get_desc()
+            happening += s3desc
             happening += "\n\n"
             time += self.__s3.get_time()
             if self.__s4 != 0:
                 happening += str(self.time_converter(time))
                 happening += "\nArrive at " + self.__s4.get_name() + ". \n"
-                happening += self.__s4.get_desc
+                s4desc = self.__s4.get_desc()
+                happening += s4desc
                 happening += "\n\n"
                 time += self.__s4.get_time()
                 if self.__s5 != 0:
                     happening += str(self.time_converter(time))
                     happening += "\nArrive at " + self.__s5.get_name() + ". \n"
-                    happening += self.__s5.get_desc
+                    s5desc = self.__s5.get_desc()
+                    happening += s5desc
                     happening += "\n\n"
                     time += self.__s5.get_time()
                     if self.__s6 != 0:
                         happening += str(self.time_converter(time))
                         happening += "\nArrive at " + self.__s6.get_name() + ". \n"
-                        happening += self.__s6.get_desc
+                        s6desc = self.__s6.get_desc()
+                        happening += s6desc
                         happening += "\n\n"
                         time += self.__s6.get_time()
                     else:
@@ -203,17 +212,21 @@ class itinerary():
         self.__d4 = day4
 
     def printFullItinerary(self):
-        str = "Day 1: \n"
-        str += self.__d1.fullDayInformation()
+        str = "Day 1: "
+        d1full = self.__d1.fullDayInformation()
+        str += d1full
         if self.__d2 != 0:
             str += "\n\nDay 2: \n"
-            str += self.__d2.fullDayInformation()
+            d2full = self.__d2.fullDayInformation()
+            str += d2full
             if self.__d3 != 0:
                 str += "\n\nDay 3: \n"
-                str += self.__d3.fullDayInformation()
+                d3full = self.__d3.fullDayInformation()
+                str += d3full
                 if self.__d4 != 0:
                     str += "\n\nDay 4: \n"
-                    str += self.__d4.fullDayInformation()
+                    d4full = self.__d4.fullDayInformation()
+                    str += d4full
         else:
             '''Dont do anything, there's only one day'''
         return str
@@ -242,7 +255,9 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     print("My Sites")
     for i in my_sites:
         print(i.get_name())
+    print(len(my_sites))
     totsites = len(my_sites)
+    print(totsites)
 
     if days == 1:
         myPickedSites = []
@@ -273,7 +288,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         if busyness == "heavy":
             for i in range (1, 13):
                 '''Six sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites))
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
@@ -281,7 +296,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "moderate":
             for i in range (1, 9):
                 '''Four sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites))
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
@@ -289,7 +304,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "light":
             for i in range (1, 5):
                 '''Two sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(0, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], 0, 0, 0, 0)
@@ -359,14 +374,14 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
             d3 = day(myPickedSites[4], myPickedSites[5], 0, 0, 0, 0)
             d4 = day(myPickedSites[6], myPickedSites[7], 0, 0, 0, 0)
         myItinerary = itinerary(d1, d2, d3, d4)
-        return myItinerary
+    return myItinerary
 
 
 @bp.route('/makeNewItinerary', methods=['POST'])
 def makeNewItinerary():
     if request.method == 'POST':
         city = request.form['city']
-        checked = request.form.get('checkbox')
+        checked = request.form.getlist('category')
         days = int(request.form['days'])
         busyness = request.form['busyness']
 
@@ -385,7 +400,7 @@ def makeNewItinerary():
             createdItinerary = generate_itinerary(berlin_sites, days, busyness, checked)
             itin = createdItinerary.printFullItinerary()
 
-        itin = createdItinerary.printFullItinerary()
+
         return render_template('itinerary.html', itin=itin)
     else:
         return render_template('survey.html')
