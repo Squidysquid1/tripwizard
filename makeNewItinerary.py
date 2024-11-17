@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import random
 from flask import Blueprint
 
-itinerary = Blueprint("survey", __name__, url_prefix="/survey")
+bp = Blueprint("survey", __name__, url_prefix="/survey")
 
 class site():
   def __init__(self, siteName, siteDesc, siteTime, siteCost, siteAddress, siteCategory):
@@ -227,7 +227,7 @@ while num2 < num:
     num2 += 1
 
 
-@itinerary.route('/survey', methods=['POST'])
+@bp.route('/survey', methods=['POST'])
 def makeNewItinerary():
     if request.method == 'POST':
         city = request.form['city']

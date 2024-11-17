@@ -26,5 +26,5 @@ class Router:
         app.register_blueprint(ItineraryRouter, url_prefix="/itin")
 
         #MakeNewItinerary 
-        from makeNewItinerary import makeNewItinerary
-        app.register_blueprint(makeNewItinerary.itinerary)
+        from makeNewItinerary import bp 
+        app.register_blueprint(bp)
