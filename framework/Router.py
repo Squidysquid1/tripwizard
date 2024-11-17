@@ -24,3 +24,7 @@ class Router:
         #Itinerary Page
         from application.routes.ItineraryRouter import ItineraryRouter
         app.register_blueprint(ItineraryRouter, url_prefix="/itin")
+
+        #MakeNewItinerary 
+        from makeNewItinerary import makeNewItinerary
+        app.register_blueprint(makeNewItinerary.itinerary)
