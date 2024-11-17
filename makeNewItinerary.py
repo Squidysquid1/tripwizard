@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import random
 from flask import Blueprint
 
-bp = Blueprint("auth", __name__, url_prefix="/auth")
+bp = Blueprint("survey", __name__, url_prefix="/survey")
 
 class site():
   def __init__(self, siteName, siteDesc, siteTime, siteCost, siteAddress, siteCategory):
