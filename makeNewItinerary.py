@@ -226,6 +226,9 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     days = daynum
     busyness = howBusy
     checked = checkboxes
+    print("Checkboxed:")
+    for i in checked:
+        print(i)
     my_sites = []
     
 
@@ -237,7 +240,8 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
 
     '''This is where the itinerary is generated.'''
     print("My Sites")
-    print(my_sites)
+    for i in my_sites:
+        print(i.get_name())
     totsites = len(my_sites)
 
     if days == 1:
@@ -372,9 +376,9 @@ def makeNewItinerary():
         num2 = 0
         while num2 < num:
             berlin_sites.append(empSite)
-            print(berlin_sites)
             num2 += 1
-
+        for i in berlin_sites:
+            print(i.get_name())
     
         if city == "berlin":
             print(city)
