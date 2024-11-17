@@ -1,8 +1,6 @@
 from flask import Flask, request, render_template
 import random
 
-app = Flask(__name__)
-
 class site():
   def __init__(self, siteName, siteDesc, siteTime, siteCost, siteAddress, siteCategory):
       self.__name = siteName
@@ -223,7 +221,8 @@ num = 100
 num2 = 0
 while num2 < num:
     berlin_sites.append(empSite)
-    num += 1
+    num2 += 1
+
 
 @app.route('/survey', methods=['POST'])
 def makeNewItinerary():
@@ -380,5 +379,3 @@ def makeNewItinerary():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
