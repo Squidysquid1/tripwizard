@@ -366,7 +366,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
 def makeNewItinerary():
     if request.method == 'POST':
         city = request.form['city']
-        checked = request.form.getlist('checkbox')
+        checked = request.form.get('checkbox')
         days = int(request.form['days'])
         busyness = request.form['busyness']
 
