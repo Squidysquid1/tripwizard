@@ -46,6 +46,8 @@ def init_db_command():
 
 
 def init_app(app):
+
+    
     """Register database functions with the Flask app. This is called by
     the application factory.
     """

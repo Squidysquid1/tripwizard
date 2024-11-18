@@ -1,9 +1,33 @@
 from flask import Flask, request, render_template
 import random
 from flask import Blueprint
+import sqlite3
 
+'''Berlin Sites Database'''
+conn = sqlite3.connect('berlin.db')
+cursor = conn.cursor()
+
+# Create a table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS berlin (
+    name,
+    desc,
+    time,
+    cost,
+    address,
+    category
+)
+''')
+conn.commit()
+
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Brandenburg Gate', 'Historic landmark and symbol of German unity', 25, 0, 'Pariser Platz, 10117 Berlin', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Reichstag Building', 'The seat of the German Parliament, offering panoramic views of the city from its glass dome (Tours cost extra)', 200, 0, 'Platz der Republik 1, 11011 Berlin', 'historical'))
+
+
+'''Blueprint'''
 bp = Blueprint("survey", __name__)
 
+'''Site Class, Day Class, and Itinerary Class'''
 class site():
   def __init__(self, siteName, siteDesc, siteTime, siteCost, siteAddress, siteCategory):
       self.__name = siteName
@@ -239,32 +263,19 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     days = daynum
     busyness = howBusy
     checked = checkboxes
-    print("Checkboxed:")
-    for i in checked:
-        print(i)
     my_sites = []
     
-
     for i in site_list:
         cat = i.get_category()
         if cat in checked:
             my_sites.append(i)
-
-
-    '''This is where the itinerary is generated.'''
-    print("My Sites")
-    for i in my_sites:
-        print(i.get_name())
-    print(len(my_sites))
-    totsites = len(my_sites)
-    print(totsites)
 
     if days == 1:
         myPickedSites = []
         if busyness == "heavy":
             for i in range (1, 7):
                 '''Six sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
@@ -288,7 +299,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         if busyness == "heavy":
             for i in range (1, 13):
                 '''Six sites in a day'''
-                randselect = random.randint(1, len(my_sites))
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
@@ -296,7 +307,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "moderate":
             for i in range (1, 9):
                 '''Four sites in a day'''
-                randselect = random.randint(1, len(my_sites))
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
@@ -404,6 +415,3 @@ def makeNewItinerary():
         return render_template('itinerary.html', itin=itin)
     else:
         return render_template('survey.html')
-
-
-
