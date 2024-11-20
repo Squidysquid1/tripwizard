@@ -22,7 +22,21 @@ conn.commit()
 
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Brandenburg Gate', 'Historic landmark and symbol of German unity', 25, 0, 'Pariser Platz, 10117 Berlin', 'historical'))
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Reichstag Building', 'The seat of the German Parliament, offering panoramic views of the city from its glass dome (Tours cost extra)', 200, 0, 'Platz der Republik 1, 11011 Berlin', 'historical'))
-
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Berlin Wall Memorial', 'Bernauer Straße 111, 13355 Berlin', 150, 0, 'A poignant reminder of the Cold War, showcasing the history of the Berlin Wall', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Checkpoint Charlie', 'Friedrichstraße 43-45, 10969 Berlin', 25, 0, 'A former border crossing point between East and West Berlin during the Cold War', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Berlin Cathedral', 'Am Lustgarten, 10178 Berlin', 150, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('East Side Gallery', 'Mühlenstraße 84-130, 10243 Berlin', 75, 0, 'The longest remaining section of the Berlin Wall, adorned with colorful murals', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Potsdamer Platz', 'Potsdamer Platz, 10963 Berlin', 150, 0, 'A vibrant square with modern architecture, shopping malls, and entertainment venues', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Charlottenburg Palace', 'Spandauer Damm 10-22, 14059 Berlin', 250, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
+cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
 
 '''Blueprint'''
 bp = Blueprint("survey", __name__)
@@ -49,7 +63,9 @@ class site():
       return self.__time
 
   def get_cost(self):
-      return self.__cost
+      stri = "Cost: $"
+      stri += self.__cost
+      return stri
 
   def get_address(self):
       return self.__address
