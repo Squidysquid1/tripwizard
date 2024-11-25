@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS berlin (
 )
 ''')
 conn.commit()
-
+'''
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Brandenburg Gate', 'Historic landmark and symbol of German unity', 25, 0, 'Pariser Platz, 10117 Berlin', 'historical'))
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Reichstag Building', 'The seat of the German Parliament, offering panoramic views of the city from its glass dome (Tours cost extra)', 200, 0, 'Platz der Republik 1, 11011 Berlin', 'historical'))
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Berlin Wall Memorial', 'Bernauer Straße 111, 13355 Berlin', 150, 0, 'A poignant reminder of the Cold War, showcasing the history of the Berlin Wall', 'historical'))
@@ -37,7 +37,7 @@ cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) V
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
 cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-
+'''
 '''Blueprint'''
 bp = Blueprint("survey", __name__)
 
@@ -412,21 +412,62 @@ def makeNewItinerary():
         days = int(request.form['days'])
         busyness = request.form['busyness']
 
-        berlin_sites = []
+        '''berlin_sites = []
         empSite = site("Empty Site", "This Site is Empty", 100, 0, "No Address", "historical")
         num = 100 
         num2 = 0
         while num2 < num:
             berlin_sites.append(empSite)
-            num2 += 1
-        for i in berlin_sites:
-            print(i.get_name())
+            num2 += 1'''
+        
+        berlin_sites = []
+        berlin_sites.append(bbGate = site("Brandenburg Gate", "A historic landmark symbolizing peace and unity.", 25, 0, "Pariser Platz", "historical"))
+        berlin_sites.append(eastSide = site("East Side Gallery", "The longest remaining section of the Berlin Wall, adorned with colorful murals.", 75, 0, "Mühlenstraße 79-81", "historical"))
+        berlin_sites.append(reichstag = site("Reichstag Building", "The seat of the German Parliament, offering panoramic views of Berlin.", 200, 0, "Platz der Republik 1", "historical"))
+        berlin_sites.append(wallMem = site("Berlin Wall Memorial", "A poignant reminder of the Cold War division of Berlin.", 150, 0, "Bernauer Straße 111", "historical"))
+        berlin_sites.append(musIsl = site("Museum Island", "A UNESCO World Heritage Site housing five world-class museums.", 400, 5, "Museum Island", "historical"))
+        berlin_sites.append(berCat = site("Berlin Cathedral", "A magnificent Baroque cathedral with stunning interior and exterior.", 100, 5, "Am Lustgarten 4", "historical"))
+        berlin_sites.append(charlie = site("Checkpoint Charlie", "A former border crossing point between East and West Berlin.", 25, 0, "Friedrichstraße 43-45", "historical"))
+        berlin_sites.append(tier = site("Tiergarten Park", "A vast urban park with diverse flora, fauna, and historical monuments.", 100, 0, "Tiergarten", "nature"))
+        berlin_sites.append(tv = site("Berlin TV Tower", "A striking television tower offering panoramic views of the city.", 2, 15, "Potsdamer Platz 1", "family"))
+        berlin_sites.append(char = site("Charlottenburg Palace", "A magnificent Baroque palace and gardens, once the residence of Prussian royalty.", 3, 10, "Spandauer Damm 10-22", "historical"))
+        berlin_sites.append(per = site("Pergamon Museum", "A world-renowned museum housing ancient artifacts from Greece, Rome, and the Middle East.", 3, 15, "Bodestraße 1-2", "family"))
+        berlin_sites.append(hum = site("Humboldt Forum", "A cultural complex dedicated to world cultures, history, and art.", 3, 10, "Unter den Linden 2", "historical"))
+        berlin_sites.append(zoo = site("Berlin Zoo", "One of the oldest zoos in the world, home to a diverse range of animals.", 3, 15, "Hahnstraße 13", "family"))
+        berlin_sites.append(vik = site("Viktoriapark", "A picturesque hilltop park offering stunning views of the city.", 2, 0, "Kreuzbergstraße 70", "nature"))
+        berlin_sites.append(hack = site("Hackescher Markt", "A vibrant district with historic courtyards, shops, and restaurants.", 2, 10, "Rosenthaler Straße 40-41", "family"))
+        berlin_sites.append(bebl = site("Bebelplatz", "A historic square associated with the Nazi book burning of 1933.", 1, 0, "Bebelplatz"))
+        berlin_sites.append(gede = site("Gedenkstätte Berliner Mauer", "A memorial site commemorating the victims of the Berlin Wall.", 2, 0, "Bernauer Straße 111", "historical"))
+        berlin_sites.append(topo = site("Topographie des Terrors", "A historical site dedicated to the history of Nazi terror.", 2, 0, "Niederkirchnerstraße 8", "historical"))
     
+
+        krakow_sites = []
+        krakow_sites.append(newSite = site("Main Market Square", "The heart of Krakow's Old Town, surrounded by colorful buildings and historic churches.", 3, 5, "Rynek Główny 1", "historical"))
+        krakow_sites.append(newSite = site("Wawel Castle", "A majestic royal castle complex overlooking the Vistula River.", 3, 10, "ul. Wawel 5", "family"))
+        krakow_sites.append(newSite = site("St. Mary's Basilica", "A Gothic church famous for its distinctive trumpet call.", 2, 5, "Rynek Główny 1", "historical"))
+        krakow_sites.append(newSite = site("Kazimierz District", "The former Jewish quarter, now a vibrant cultural hub.", 3, 10, "ul. Miodowa 22", "historical"))
+        krakow_sites.append(newSite = site("Planty Park", "A green belt encircling the Old Town, perfect for leisurely walks.", 2, 0, "ul. Planty", "family"))
+        krakow_sites.append(newSite = site("Kraków Barbican", "A fortified gateway to the Old Town.", 1, 0, "ul. Basztowa 1", "historical"))
+        krakow_sites.append(newSite = site("Wieliczka Salt Mine", "A UNESCO World Heritage Site, a vast network of underground salt chambers.", 5, 30, "ul. Daniłowicza 20", "historical"))
+        krakow_sites.append(newSite = site("Rynek Główny Underground Museum", "A fascinating museum showcasing the history of Krakow's Main Market Square.", 2, 10, "Rynek Główny 1", "historical"))
+        krakow_sites.append(newSite = site("Czartoryski Museum", "A museum housing a diverse collection of art and historical artifacts.", 3, 10, "ul. św. Jana 19", "historical"))
+        krakow_sites.append(newSite = site("Collegium Maius", "The oldest building of the Jagiellonian University.", 2, 5, "ul. Gołębia 24", "historical"))
+        krakow_sites.append(newSite = site("National Museum in Krakow", "A comprehensive museum with a vast collection of art and artifacts.", 3, 10, "ul. św. Jana 22", "family"))
+        krakow_sites.append(newSite = site("Kraków Zoological Garden", "A zoo with a diverse range of animals, including many endangered species.", 3, 15, "ul. Krasińskiego 9a", "family"))
+        krakow_sites.append(newSite = site("Kopiec Kościuszki", "A hilltop mound commemorating Tadeusz Kościuszko, a Polish military leader.", 2, 0, "ul. Kościuszki 1", "nature"))
+        krakow_sites.append(newSite = site("Błonia Park", "A large park used for various events and festivals.", 2, 0, "Błonia", "nature"))
+        krakow_sites.append(newSite = site("Kraków Philharmonic Hall", "A beautiful concert hall hosting classical music performances.", 2, 10, "ul. Zwierzyniecka 1", "family"))
+        krakow_sites.append(newSite = site("St. Florian's Gate", "A historic gate leading to the Old Town.", 1, 0, "ul. Floriańska 41", "historical"))
+        krakow_sites.append(newSite = site("Kraków Main Railway Station", "A beautiful Art Nouveau railway station.", 1, 0, "pl. Jana Nowaka-Jeziorańskiego 1", "family"))
+        krakow_sites.append(newSite = site("Smoczy Smok Wawelski", "A mythical dragon sculpture near Wawel Castle.", 1, 0, "ul. Wawel 5", "family"))
+        
         if city == "berlin":
-            print(city)
             createdItinerary = generate_itinerary(berlin_sites, days, busyness, checked)
             itin = createdItinerary.printFullItinerary()
 
+        elif city == "krakow":
+            createdItinerary = generate_itinerary(krakow_sites, days, busyness, checked)
+            itin = createdItinerary.printFullItinerary()
 
         return render_template('itinerary.html', itin=itin)
     else:
