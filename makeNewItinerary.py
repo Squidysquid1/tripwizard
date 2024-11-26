@@ -181,30 +181,43 @@ class day():
             
 
     def fullDayInformation(self):
+        '''Leave hotel: Start of Day'''
         time = 850
         happening = str(self.time_converter(time))
         happening += "\t\t"
         happening += "Leave Hotel and go to " + self.__s1.get_name() + ". \n"
         time += 50
-        
-        '''happening = "\nArrive at " + self.__s1.get_name() + ". \n"
-        siteOneTime = self.__s1.get_time()
-        time += siteOneTime
-        self.time_converter(time)'''
 
+        '''Arrive at Site 1'''
         happening += str(self.time_converter(time))
         happening += "\nArrive at " + self.__s1.get_name() + ". \n"
         s1desc = self.__s1.get_desc()
-        happening += s1desc
+        happening += s2desc
+        '''Display Address so user can get the route'''
+        happening += "Address: "
+        s1address = self.__s1.get_address()
+        happening += s1address
         happening += "\n\n"
+        '''Account for time spent at the site'''
         time += self.__s1.get_time()
 
+        '''Leave Site 1, go to Site 2'''
+        happening += str(self.time_converter(time))
+        happening += "\nLeave " + self.__s1.get_name() + " and go to " + self.__s2.get_name()
+        time += 50
+
+        '''Arrive at Site 2'''
         happening += str(self.time_converter(time))
         happening += "\nArrive at " + self.__s2.get_name() + ". \n"
         s2desc = self.__s2.get_desc()
         happening += s2desc
+        '''Display Address so user can get the route'''
+        happening += "Address: "
+        s1address = self.__s1.get_address()
+        happening += s1address
         happening += "\n\n"
-        time += self.__s2.get_time() 
+        '''Account for time spent at the site'''
+        time += self.__s1.get_time()
 
         if self.__s3 != 0:
             happening += str(self.time_converter(time))
@@ -298,14 +311,14 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "moderate":
             for i in range (1, 5):
                 '''Four sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
         elif busyness == "light":
             for i in range (1, 3):
                 '''Two sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], 0, 0, 0, 0)
@@ -331,7 +344,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "light":
             for i in range (1, 5):
                 '''Two sites in a day'''
-                randselect = random.randint(0, len(my_sites)-1)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], 0, 0, 0, 0)
@@ -342,7 +355,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         if busyness == "heavy":
             for i in range (1, 19):
                 '''Six sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
@@ -351,8 +364,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "moderate":
             for i in range (1, 13):
                 '''Four sites in a day'''
-                totsites = totsites - 1
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
@@ -361,7 +373,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "light":
             for i in range (1, 7):
                 '''Two sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], 0, 0, 0, 0)
@@ -373,7 +385,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         if busyness == "heavy":
             for i in range (1, 25):
                 '''Six sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], myPickedSites[4], myPickedSites[5])
@@ -383,7 +395,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "moderate":
             for i in range (1, 17):
                 '''Four sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], myPickedSites[2], myPickedSites[3], 0, 0)
@@ -393,7 +405,7 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
         elif busyness == "light":
             for i in range (1, 9):
                 '''Two sites in a day'''
-                randselect = random.randint(1, totsites)
+                randselect = random.randint(1, len(my_sites)-1)
                 myPickedSites.append(my_sites[randselect])
                 my_sites.remove(my_sites[randselect])
             d1 = day(myPickedSites[0], myPickedSites[1], 0, 0, 0, 0)
@@ -421,52 +433,132 @@ def makeNewItinerary():
             num2 += 1'''
         
         berlin_sites = []
-        berlin_sites.append(bbGate = site("Brandenburg Gate", "A historic landmark symbolizing peace and unity.", 25, 0, "Pariser Platz", "historical"))
-        berlin_sites.append(eastSide = site("East Side Gallery", "The longest remaining section of the Berlin Wall, adorned with colorful murals.", 75, 0, "Mühlenstraße 79-81", "historical"))
-        berlin_sites.append(reichstag = site("Reichstag Building", "The seat of the German Parliament, offering panoramic views of Berlin.", 200, 0, "Platz der Republik 1", "historical"))
-        berlin_sites.append(wallMem = site("Berlin Wall Memorial", "A poignant reminder of the Cold War division of Berlin.", 150, 0, "Bernauer Straße 111", "historical"))
-        berlin_sites.append(musIsl = site("Museum Island", "A UNESCO World Heritage Site housing five world-class museums.", 400, 5, "Museum Island", "historical"))
-        berlin_sites.append(berCat = site("Berlin Cathedral", "A magnificent Baroque cathedral with stunning interior and exterior.", 100, 5, "Am Lustgarten 4", "historical"))
-        berlin_sites.append(charlie = site("Checkpoint Charlie", "A former border crossing point between East and West Berlin.", 25, 0, "Friedrichstraße 43-45", "historical"))
-        berlin_sites.append(tier = site("Tiergarten Park", "A vast urban park with diverse flora, fauna, and historical monuments.", 100, 0, "Tiergarten", "nature"))
-        berlin_sites.append(tv = site("Berlin TV Tower", "A striking television tower offering panoramic views of the city.", 2, 15, "Potsdamer Platz 1", "family"))
-        berlin_sites.append(char = site("Charlottenburg Palace", "A magnificent Baroque palace and gardens, once the residence of Prussian royalty.", 3, 10, "Spandauer Damm 10-22", "historical"))
-        berlin_sites.append(per = site("Pergamon Museum", "A world-renowned museum housing ancient artifacts from Greece, Rome, and the Middle East.", 3, 15, "Bodestraße 1-2", "family"))
-        berlin_sites.append(hum = site("Humboldt Forum", "A cultural complex dedicated to world cultures, history, and art.", 3, 10, "Unter den Linden 2", "historical"))
-        berlin_sites.append(zoo = site("Berlin Zoo", "One of the oldest zoos in the world, home to a diverse range of animals.", 3, 15, "Hahnstraße 13", "family"))
-        berlin_sites.append(vik = site("Viktoriapark", "A picturesque hilltop park offering stunning views of the city.", 2, 0, "Kreuzbergstraße 70", "nature"))
-        berlin_sites.append(hack = site("Hackescher Markt", "A vibrant district with historic courtyards, shops, and restaurants.", 2, 10, "Rosenthaler Straße 40-41", "family"))
-        berlin_sites.append(bebl = site("Bebelplatz", "A historic square associated with the Nazi book burning of 1933.", 1, 0, "Bebelplatz"))
-        berlin_sites.append(gede = site("Gedenkstätte Berliner Mauer", "A memorial site commemorating the victims of the Berlin Wall.", 2, 0, "Bernauer Straße 111", "historical"))
-        berlin_sites.append(topo = site("Topographie des Terrors", "A historical site dedicated to the history of Nazi terror.", 2, 0, "Niederkirchnerstraße 8", "historical"))
+        bbGate = site("Brandenburg Gate", "A historic landmark symbolizing peace and unity.", 25, 0, "Pariser Platz", "historical")
+        berlin_sites.append(bbGate)
+        eastSide = site("East Side Gallery", "The longest remaining section of the Berlin Wall, adorned with colorful murals.", 75, 0, "Mühlenstraße 79-81", "historical")
+        berlin_sites.append(eastSide)
+        reichstag = site("Reichstag Building", "The seat of the German Parliament, offering panoramic views of Berlin.", 200, 0, "Platz der Republik 1", "historical")
+        berlin_sites.append(reichstag)
+        wallMem = site("Berlin Wall Memorial", "A poignant reminder of the Cold War division of Berlin.", 150, 0, "Bernauer Straße 111", "historical")
+        berlin_sites.append(wallMem)
+        musIsl = site("Museum Island", "A UNESCO World Heritage Site housing five world-class museums.", 400, 5, "Museum Island", "historical")
+        berlin_sites.append(musIsl)
+        berCat = site("Berlin Cathedral", "A magnificent Baroque cathedral with stunning interior and exterior.", 100, 5, "Am Lustgarten 4", "historical")
+        berlin_sites.append(berCat)
+        charlie = site("Checkpoint Charlie", "A former border crossing point between East and West Berlin.", 25, 0, "Friedrichstraße 43-45", "historical")
+        berlin_sites.append(charlie)
+        tier = site("Tiergarten Park", "A vast urban park with diverse flora, fauna, and historical monuments.", 100, 0, "Tiergarten", "nature")
+        berlin_sites.append(tier)
+        tv = site("Berlin TV Tower", "A striking television tower offering panoramic views of the city.", 2, 15, "Potsdamer Platz 1", "family")
+        berlin_sites.append(tv)
+        char = site("Charlottenburg Palace", "A magnificent Baroque palace and gardens, once the residence of Prussian royalty.", 3, 10, "Spandauer Damm 10-22", "historical")
+        berlin_sites.append(char)
+        per = site("Pergamon Museum", "A world-renowned museum housing ancient artifacts from Greece, Rome, and the Middle East.", 3, 15, "Bodestraße 1-2", "family")
+        berlin_sites.append(per)
+        hum = site("Humboldt Forum", "A cultural complex dedicated to world cultures, history, and art.", 3, 10, "Unter den Linden 2", "historical")
+        berlin_sites.append(hum)
+        zoo = site("Berlin Zoo", "One of the oldest zoos in the world, home to a diverse range of animals.", 3, 15, "Hahnstraße 13", "family")
+        berlin_sites.append(zoo)
+        vik = site("Viktoriapark", "A picturesque hilltop park offering stunning views of the city.", 2, 0, "Kreuzbergstraße 70", "nature")
+        berlin_sites.append(vik)
+        hack = site("Hackescher Markt", "A vibrant district with historic courtyards, shops, and restaurants.", 2, 10, "Rosenthaler Straße 40-41", "family")
+        berlin_sites.append(hack)
+        bebl = site("Bebelplatz", "A historic square associated with the Nazi book burning of 1933.", 1, 0, "Bebelplatz", 'historical')
+        berlin_sites.append(bebl)
+        gede = site("Gedenkstätte Berliner Mauer", "A memorial site commemorating the victims of the Berlin Wall.", 2, 0, "Bernauer Straße 111", "historical")
+        berlin_sites.append(gede)
+        topo = site("Topographie des Terrors", "A historical site dedicated to the history of Nazi terror.", 2, 0, "Niederkirchnerstraße 8", "historical")
+        berlin_sites.append(topo)
     
 
         krakow_sites = []
-        krakow_sites.append(newSite = site("Main Market Square", "The heart of Krakow's Old Town, surrounded by colorful buildings and historic churches.", 3, 5, "Rynek Główny 1", "historical"))
-        krakow_sites.append(newSite = site("Wawel Castle", "A majestic royal castle complex overlooking the Vistula River.", 3, 10, "ul. Wawel 5", "family"))
-        krakow_sites.append(newSite = site("St. Mary's Basilica", "A Gothic church famous for its distinctive trumpet call.", 2, 5, "Rynek Główny 1", "historical"))
-        krakow_sites.append(newSite = site("Kazimierz District", "The former Jewish quarter, now a vibrant cultural hub.", 3, 10, "ul. Miodowa 22", "historical"))
-        krakow_sites.append(newSite = site("Planty Park", "A green belt encircling the Old Town, perfect for leisurely walks.", 2, 0, "ul. Planty", "family"))
-        krakow_sites.append(newSite = site("Kraków Barbican", "A fortified gateway to the Old Town.", 1, 0, "ul. Basztowa 1", "historical"))
-        krakow_sites.append(newSite = site("Wieliczka Salt Mine", "A UNESCO World Heritage Site, a vast network of underground salt chambers.", 5, 30, "ul. Daniłowicza 20", "historical"))
-        krakow_sites.append(newSite = site("Rynek Główny Underground Museum", "A fascinating museum showcasing the history of Krakow's Main Market Square.", 2, 10, "Rynek Główny 1", "historical"))
-        krakow_sites.append(newSite = site("Czartoryski Museum", "A museum housing a diverse collection of art and historical artifacts.", 3, 10, "ul. św. Jana 19", "historical"))
-        krakow_sites.append(newSite = site("Collegium Maius", "The oldest building of the Jagiellonian University.", 2, 5, "ul. Gołębia 24", "historical"))
-        krakow_sites.append(newSite = site("National Museum in Krakow", "A comprehensive museum with a vast collection of art and artifacts.", 3, 10, "ul. św. Jana 22", "family"))
-        krakow_sites.append(newSite = site("Kraków Zoological Garden", "A zoo with a diverse range of animals, including many endangered species.", 3, 15, "ul. Krasińskiego 9a", "family"))
-        krakow_sites.append(newSite = site("Kopiec Kościuszki", "A hilltop mound commemorating Tadeusz Kościuszko, a Polish military leader.", 2, 0, "ul. Kościuszki 1", "nature"))
-        krakow_sites.append(newSite = site("Błonia Park", "A large park used for various events and festivals.", 2, 0, "Błonia", "nature"))
-        krakow_sites.append(newSite = site("Kraków Philharmonic Hall", "A beautiful concert hall hosting classical music performances.", 2, 10, "ul. Zwierzyniecka 1", "family"))
-        krakow_sites.append(newSite = site("St. Florian's Gate", "A historic gate leading to the Old Town.", 1, 0, "ul. Floriańska 41", "historical"))
-        krakow_sites.append(newSite = site("Kraków Main Railway Station", "A beautiful Art Nouveau railway station.", 1, 0, "pl. Jana Nowaka-Jeziorańskiego 1", "family"))
-        krakow_sites.append(newSite = site("Smoczy Smok Wawelski", "A mythical dragon sculpture near Wawel Castle.", 1, 0, "ul. Wawel 5", "family"))
+        newSite = site("Main Market Square", "The heart of Krakow's Old Town, surrounded by colorful buildings and historic churches.", 300, 5, "Rynek Główny 1", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Wawel Castle", "A majestic royal castle complex overlooking the Vistula River.", 300, 10, "ul. Wawel 5", "family")
+        krakow_sites.append(newSite)
+        newSite = site("St. Mary's Basilica", "A Gothic church famous for its distinctive trumpet call.", 200, 5, "Rynek Główny 1", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Kazimierz District", "The former Jewish quarter, now a vibrant cultural hub.", 300, 10, "ul. Miodowa 22", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Planty Park", "A green belt encircling the Old Town, perfect for leisurely walks.", 200, 0, "ul. Planty", "family")
+        krakow_sites.append(newSite)
+        newSite = site("Kraków Barbican", "A fortified gateway to the Old Town.", 100, 0, "ul. Basztowa 1", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Wieliczka Salt Mine", "A UNESCO World Heritage Site, a vast network of underground salt chambers.", 500, 30, "ul. Daniłowicza 20", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Rynek Główny Underground Museum", "A fascinating museum showcasing the history of Krakow's Main Market Square.", 200, 10, "Rynek Główny 1", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Czartoryski Museum", "A museum housing a diverse collection of art and historical artifacts.", 300, 10, "ul. św. Jana 19", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Collegium Maius", "The oldest building of the Jagiellonian University.", 200, 5, "ul. Gołębia 24", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("National Museum in Krakow", "A comprehensive museum with a vast collection of art and artifacts.", 300, 10, "ul. św. Jana 22", "family")
+        krakow_sites.append(newSite)
+        newSite = site("Kraków Zoological Garden", "A zoo with a diverse range of animals, including many endangered species.", 300, 15, "ul. Krasińskiego 9a", "family")
+        krakow_sites.append(newSite)
+        newSite = site("Kopiec Kościuszki", "A hilltop mound commemorating Tadeusz Kościuszko, a Polish military leader.", 200, 0, "ul. Kościuszki 1", "nature")
+        krakow_sites.append(newSite)
+        newSite = site("Błonia Park", "A large park used for various events and festivals.", 200, 0, "Błonia", "nature")
+        krakow_sites.append(newSite)
+        newSite = site("Kraków Philharmonic Hall", "A beautiful concert hall hosting classical music performances.", 200, 10, "ul. Zwierzyniecka 1", "family")
+        krakow_sites.append(newSite)
+        newSite = site("St. Florian's Gate", "A historic gate leading to the Old Town.", 100, 0, "ul. Floriańska 41", "historical")
+        krakow_sites.append(newSite)
+        newSite = site("Kraków Main Railway Station", "A beautiful Art Nouveau railway station.", 100, 0, "pl. Jana Nowaka-Jeziorańskiego 1", "family")
+        krakow_sites.append(newSite)
+        newSite = site("Smoczy Smok Wawelski", "A mythical dragon sculpture near Wawel Castle.", 100, 0, "ul. Wawel 5", "family")
+        krakow_sites.append(newSite)
         
+
+        amsterdam_sites = []
+        newSite = site("Rijksmuseum", "A world-class museum showcasing Dutch art and history.", 400, 20, "Museumstraat 1", "historical")
+        amsterdam_sites.append(newSite)
+        newSite = site("Anne Frank House", "A poignant museum dedicated to the life of Anne Frank.", 300, 15, "Prinsengracht 263-267", "historical")
+        amsterdam_sites.append(newSite)
+        newSite = site("Van Gogh Museum", "A museum dedicated to the life and work of Vincent van Gogh.", 300, 15, "Museumplein 6", 'historical')
+        amsterdam_sites.append(newSite)
+        newSite = site("Stedelijk Museum", "A museum of modern and contemporary art.", 300, 10, "Museumplein 10", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Vondelpark", "A large urban park with beautiful gardens, ponds, and playgrounds.", 200, 0, "Overtoom 185", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Dam Square", "A historic square in the heart of Amsterdam.", 200, 5, "Dam 1", 'historical')
+        amsterdam_sites.append(newSite)
+        newSite = site("Royal Palace", "A 17th-century palace on Dam Square.", 200, 10, "Dam 1", 'historical')
+        amsterdam_sites.append(newSite)
+        newSite = site("Nieuwe Kerk", "A medieval church on Dam Square.", 200, 5, "Dam 9", "family")
+        amsterdam_sites.append(newSite)
+        newSite = site("Jordaan District", "A charming neighborhood with canals, historic houses, and trendy shops.", 200, 5, "Jordaan", "historical")
+        amsterdam_sites.append(newSite)
+        newSite = site("Red Light District", "A historic district known for its red-lit windows.", 100, 5, "De Wallen", 'historical')
+        amsterdam_sites.append(newSite)
+        newSite = site("Hermitage Amsterdam", "A branch of the State Hermitage Museum in St. Petersburg.", 300, 15, "Amstel 51", 'historical')
+        amsterdam_sites.append(newSite)
+        newSite = site("NEMO Science Museum", "An interactive science museum for all ages.", 300, 10, "Oosterdok 2", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("A'DAM Lookout", "A panoramic observation deck on top of a former ferry terminal.", 200, 15, "Overhoeksplein 5", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Bloemenmarkt", "A floating flower market on the Singel canal.", 100, 5, "Singel", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Rembrandtplein", "A lively square with theaters, cinemas, and restaurants.", 200, 10, "Rembrandtplein", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Waterlooplein", "A vibrant market square with flea markets and vintage shops.", 200, 5, "Waterlooplein", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Begijnhof", "A historic cloister with charming houses and a peaceful atmosphere.", 100, 0, "Begijnhof", 'family')
+        amsterdam_sites.append(newSite)
+        newSite = site("Museumplein", "A square home to several world-class museums.", 200, 0, "Museumplein", 'historical')
+        amsterdam_sites.append(newSite)
+        newSite = site("Westerkerk", "A 17th-century church with a distinctive tower.", 100, 0, "Prinsengracht 297", 'historical')
+        amsterdam_sites.append(newSite)
         if city == "berlin":
             createdItinerary = generate_itinerary(berlin_sites, days, busyness, checked)
             itin = createdItinerary.printFullItinerary()
 
         elif city == "krakow":
             createdItinerary = generate_itinerary(krakow_sites, days, busyness, checked)
+            itin = createdItinerary.printFullItinerary()
+
+        elif city == "amsterdam":
+            createdItinerary = generate_itinerary(amsterdam_sites, days, busyness, checked)
             itin = createdItinerary.printFullItinerary()
 
         return render_template('itinerary.html', itin=itin)

@@ -4,6 +4,11 @@
 
 {% block content %}
 
+<div class="centralPage">
+    <p>NOTE: To save this itinerary, use the print command on your computer to save as a PDF, or print it out. </p>
+    <p>We estimate 30 minutes to travel from one site to the next. It might take you longer or shorter to get there, depending on the route you take. </p>
+    <p>Time is displayed using European time standards, meaning A.M. and P.M. are not relevant. Instead, a 24-hour clock will be used. </p>
+</div>
 <h1 class="subPageHeader">&emsp;Full Itinerary: </h1>
 
 <p>{{ itin }}</p>
@@ -11,6 +16,16 @@
 <br>
 <br>
 <br>
+<iframe
+  width="600"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=API_KEY
+    &q=Space+Needle,Seattle+WA">
+</iframe>
 <br>
 <br>
 <br>
