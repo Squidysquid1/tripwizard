@@ -1,0 +1,83 @@
+import sqlite3
+
+# Connect to SQLite database (will create it if it doesn't exist)
+conn = sqlite3.connect('/content/tourist_attractions.db')
+cursor = conn.cursor()
+
+# Create tables for each city
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS krakow_site (
+    name TEXT,
+    address TEXT,
+    cost TEXT,
+    description TEXT,
+    time INTEGER
+)''')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS amsterdam_site (
+    name TEXT,
+    address TEXT,
+    cost TEXT,
+    description TEXT,
+    time INTEGER
+)''')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS venice_site (
+    name TEXT,
+    address TEXT,
+    cost TEXT,
+    description TEXT,
+    time INTEGER
+)''')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS barcelona_site (
+    name TEXT,
+    address TEXT,
+    cost TEXT,
+    description TEXT,
+    time INTEGER
+)''')
+
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS rome_site (
+    name TEXT,
+    address TEXT,
+    cost TEXT,
+    description TEXT,
+    time INTEGER
+)''')
+
+# Insert sample data for Krakow
+cursor.execute("INSERT INTO krakow_site VALUES ('Wawel Castle', 'Wawel 5, 31-001 Kraków, Poland', '12', 'Wawel Castle is one of Poland''s most historic sites, dating back to the 11th century. The castle complex includes a cathedral, royal apartments, and beautiful courtyards. It has been a symbol of Polish culture and power.', '300')")
+cursor.execute("INSERT INTO krakow_site VALUES ('Main Market Square', 'Rynek Główny 1, 31-042 Kraków, Poland', '0', 'Main Market Square is the heart of Krakow. It is one of the largest medieval town squares in Europe, filled with historical buildings, lively cafes, and street performers. Don''t miss the Cloth Hall and St. Mary''s Basilica.', '200')")
+cursor.execute("INSERT INTO krakow_site VALUES ('Kazimierz District', 'Kazimierz, 31-001 Kraków, Poland', '0', 'Kazimierz was once the center of Jewish life in Krakow. Today, it is a lively area with a mix of historical sites, synagogues, museums, and vibrant cafes. It is a UNESCO World Heritage Site, showcasing Polish-Jewish culture.', '250')")
+cursor.execute("INSERT INTO krakow_site VALUES ('Auschwitz-Birkenau Memorial', 'Auschwitz, 32-600 Oświęcim, Poland', '0', 'The Auschwitz-Birkenau Memorial and Museum serves as a poignant reminder of the Holocaust. It is located on the site of the largest Nazi concentration and extermination camp, with exhibits and original barracks to educate visitors on the atrocities.', '400')")
+
+# Insert sample data for Amsterdam
+cursor.execute("INSERT INTO amsterdam_site VALUES ('Rijksmuseum', 'Museumstraat 1, 1071 XX Amsterdam, Netherlands', '20', 'The Rijksmuseum is the largest and most prestigious museum in the Netherlands, home to works by Dutch masters like Rembrandt and Vermeer. A visit here offers a deep dive into Dutch history and art.', '300')")
+cursor.execute("INSERT INTO amsterdam_site VALUES ('Anne Frank House', 'Prinsengracht 263-267, 1016 GV Amsterdam, Netherlands', '14', 'The Anne Frank House is a museum dedicated to the Jewish wartime diarist Anne Frank. Visitors can see the hidden annex where she and her family lived during World War II.', '150')")
+cursor.execute("INSERT INTO amsterdam_site VALUES ('Vondelpark', 'Vondelpark, Amsterdam, Netherlands', '0', 'Vondelpark is Amsterdam's most famous park, offering green spaces, ponds, and paths for cycling and walking. It's an ideal spot to relax and enjoy nature in the heart of the city.', '200')")
+
+# Insert sample data for Venice
+cursor.execute("INSERT INTO venice_site VALUES ('St. Mark''s Basilica', 'Piazza San Marco, 328, 30124 Venezia VE, Italy', '0', 'St. Mark''s Basilica is an iconic landmark of Venice, famous for its Byzantine architecture and impressive mosaics. Visitors can admire the stunning interior and explore the nearby Piazza San Marco.', '200')")
+cursor.execute("INSERT INTO venice_site VALUES ('Doge''s Palace', 'Piazza San Marco, 1, 30124 Venezia VE, Italy', '20', 'The Doge''s Palace is a magnificent Gothic building that was once the residence of the Doge of Venice. It now houses a museum with art collections and a fascinating history of Venice's government.', '300')")
+cursor.execute("INSERT INTO venice_site VALUES ('Grand Canal', 'Canal Grande, Venice, Italy', '0', 'The Grand Canal is Venice's main waterway, lined with beautiful palaces and churches. A gondola ride or vaporetto tour along the canal offers an unforgettable perspective of the city.', '150')")
+
+# Insert sample data for Barcelona
+cursor.execute("INSERT INTO barcelona_site VALUES ('Sagrada Familia', 'Carrer de Mallorca, 401, 08013 Barcelona, Spain', '25', 'The Sagrada Familia is a masterpiece of modernist architecture designed by Antoni Gaudí. It is famous for its unique, organic forms and towering spires, and has been under construction for over a century.', '400')")
+cursor.execute("INSERT INTO barcelona_site VALUES ('Park Güell', 'Carrer d''Olot, 5, 08024 Barcelona, Spain', '10', 'Park Güell is another of Antoni Gaudí's masterpieces, a public park filled with colorful mosaics, sculptures, and sweeping views of Barcelona. It's a UNESCO World Heritage Site.', '300')")
+cursor.execute("INSERT INTO barcelona_site VALUES ('La Rambla', 'La Rambla, 08002 Barcelona, Spain', '0', 'La Rambla is a bustling street in the heart of Barcelona, famous for its vibrant atmosphere, street performers, shops, and cafes. It's a must-see for visitors to the city.', '150')")
+
+# Insert sample data for Rome
+cursor.execute("INSERT INTO rome_site VALUES ('Colosseum', 'Piazza del Colosseo, 1, 00184 Roma RM, Italy', '16', 'The Colosseum is one of the most famous ancient structures in Rome, used for gladiatorial contests. Visitors can explore its ancient corridors and imagine the grandeur of Roman spectacles.', '400')")
+cursor.execute("INSERT INTO rome_site VALUES ('Vatican Museums', 'Viale Vaticano, 00120 Vatican City, Rome, Italy', '17', 'The Vatican Museums are home to some of the world''s most famous artworks, including the Sistine Chapel ceiling painted by Michelangelo. A visit here offers a chance to explore centuries of religious and cultural history.', '350')")
+cursor.execute("INSERT INTO rome_site VALUES ('Pantheon', 'Piazza della Rotonda, 00186 Roma RM, Italy', '0', 'The Pantheon is a former Roman temple, now a church, known for its impressive dome. It is one of the best-preserved ancient Roman buildings, offering a glimpse into Rome's rich architectural heritage.', '200')")
+
+# Commit changes and close the connection
+conn.commit()
+conn.close()
+
+print("Database and tables created, and data inserted successfully!")
