@@ -3,41 +3,6 @@ import random
 from flask import Blueprint
 import sqlite3
 
-'''Berlin Sites Database'''
-conn = sqlite3.connect('berlin.db')
-cursor = conn.cursor()
-
-# Create a table
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS berlin (
-    name,
-    desc,
-    time,
-    cost,
-    address,
-    category
-)
-''')
-conn.commit()
-'''
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Brandenburg Gate', 'Historic landmark and symbol of German unity', 25, 0, 'Pariser Platz, 10117 Berlin', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Reichstag Building', 'The seat of the German Parliament, offering panoramic views of the city from its glass dome (Tours cost extra)', 200, 0, 'Platz der Republik 1, 11011 Berlin', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Berlin Wall Memorial', 'Bernauer Straße 111, 13355 Berlin', 150, 0, 'A poignant reminder of the Cold War, showcasing the history of the Berlin Wall', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Checkpoint Charlie', 'Friedrichstraße 43-45, 10969 Berlin', 25, 0, 'A former border crossing point between East and West Berlin during the Cold War', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Berlin Cathedral', 'Am Lustgarten, 10178 Berlin', 150, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('East Side Gallery', 'Mühlenstraße 84-130, 10243 Berlin', 75, 0, 'The longest remaining section of the Berlin Wall, adorned with colorful murals', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Potsdamer Platz', 'Potsdamer Platz, 10963 Berlin', 150, 0, 'A vibrant square with modern architecture, shopping malls, and entertainment venues', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('Charlottenburg Palace', 'Spandauer Damm 10-22, 14059 Berlin', 250, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-cursor.execute('INSERT INTO berlin (name, desc, time, cost, address, category) VALUES (?, ?, ?, ?, ?, ?)', ('', '', 0, 0, '', 'historical'))
-'''
 '''Blueprint'''
 bp = Blueprint("survey", __name__)
 
@@ -60,7 +25,8 @@ class site():
       return stri
 
   def get_time(self):
-      return self.__time
+      ti = int(self.__time)
+      return ti
 
   def get_cost(self):
       stri = "Cost: $"
@@ -100,6 +66,7 @@ class day():
     def get_s6(self):
         return self.__s6
 
+    '''This method deals with the way that we chose to handle time. It takes the time input and converts it into regular time.'''
     def time_converter(self, timeNum):
         time = timeNum
         toMinutes = (3/5)
@@ -181,6 +148,7 @@ class day():
             
 
     def fullDayInformation(self):
+        '''This method prints out all the information of the itinerary. It puts it all together. '''
         '''Leave hotel: Start of Day'''
         time = 850
         happening = str(self.time_converter(time))
@@ -192,9 +160,9 @@ class day():
         happening += str(self.time_converter(time))
         happening += "\nArrive at " + self.__s1.get_name() + ". \n"
         s1desc = self.__s1.get_desc()
-        happening += s2desc
+        happening += s1desc
         '''Display Address so user can get the route'''
-        happening += "Address: "
+        happening += " Address: "
         s1address = self.__s1.get_address()
         happening += s1address
         happening += "\n\n"
@@ -203,7 +171,7 @@ class day():
 
         '''Leave Site 1, go to Site 2'''
         happening += str(self.time_converter(time))
-        happening += "\nLeave " + self.__s1.get_name() + " and go to " + self.__s2.get_name()
+        happening += "\nLeave " + self.__s1.get_name() + " and go to " + self.__s2.get_name() + ". \n"
         time += 50
 
         '''Arrive at Site 2'''
@@ -211,41 +179,83 @@ class day():
         happening += "\nArrive at " + self.__s2.get_name() + ". \n"
         s2desc = self.__s2.get_desc()
         happening += s2desc
-        '''Display Address so user can get the route'''
-        happening += "Address: "
-        s1address = self.__s1.get_address()
-        happening += s1address
+        happening += " Address: "
+        s2address = self.__s2.get_address()
+        happening += s2address
         happening += "\n\n"
         '''Account for time spent at the site'''
-        time += self.__s1.get_time()
+        time += self.__s2.get_time()
 
         if self.__s3 != 0:
+            '''Leave Site 2, go to Site 3'''
+            happening += str(self.time_converter(time))
+            happening += "\nLeave " + self.__s2.get_name() + " and go to " + self.__s3.get_name() + ". \n"
+            time += 50
+
+            '''Arrive at Site 3'''
             happening += str(self.time_converter(time))
             happening += "\nArrive at " + self.__s3.get_name() + ". \n"
             s3desc = self.__s3.get_desc()
             happening += s3desc
+            happening += " Address: "
+            s3address = self.__s3.get_address()
+            happening += s3address
             happening += "\n\n"
+            '''Account for time spent at the site'''
             time += self.__s3.get_time()
+
             if self.__s4 != 0:
+                '''Leave Site 3, go to Site 4'''
+                happening += str(self.time_converter(time))
+                happening += "\nLeave " + self.__s3.get_name() + " and go to " + self.__s4.get_name() + ". \n"
+                time += 50
+
+                '''Arrive at Site 4'''
                 happening += str(self.time_converter(time))
                 happening += "\nArrive at " + self.__s4.get_name() + ". \n"
                 s4desc = self.__s4.get_desc()
                 happening += s4desc
+                happening += " Address: "
+                s4address = self.__s4.get_address()
+                happening += s4address
                 happening += "\n\n"
+                '''Account for time spent at the site'''
                 time += self.__s4.get_time()
+
                 if self.__s5 != 0:
+                    '''Leave Site 4, go to Site 5'''
+                    happening += str(self.time_converter(time))
+                    happening += "\nLeave " + self.__s4.get_name() + " and go to " + self.__s5.get_name() + ". \n"
+                    time += 50
+
+                    '''Arrive at Site 5'''
                     happening += str(self.time_converter(time))
                     happening += "\nArrive at " + self.__s5.get_name() + ". \n"
                     s5desc = self.__s5.get_desc()
                     happening += s5desc
+                    happening += " Address: "
+                    s5address = self.__s5.get_address()
+                    happening += s5address
                     happening += "\n\n"
+                    '''Account for time spent at the site'''
                     time += self.__s5.get_time()
+
                     if self.__s6 != 0:
+                        '''Leave Site 5, go to Site 6'''
+                        happening += str(self.time_converter(time))
+                        happening += "\nLeave " + self.__s6.get_name() + " and go to " + self.__s6.get_name() + ". \n"
+                        time += 50
+
+                        '''Arrive at Site 6'''
                         happening += str(self.time_converter(time))
                         happening += "\nArrive at " + self.__s6.get_name() + ". \n"
                         s6desc = self.__s6.get_desc()
                         happening += s6desc
+                        happening += " Address: "
+                        s6address = self.__s6.get_address()
+                        happening += s6address
                         happening += "\n\n"
+                        '''Account for time spent at the site'''
                         time += self.__s6.get_time()
                     else:
                         '''no site 6, no more time adjustments'''
@@ -285,6 +295,171 @@ class itinerary():
         return str
 
 
+'''Berlin Sites Database'''
+conn = sqlite3.connect('berlin.db')
+cursor = conn.cursor()
+
+# Create a table
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS berlin (
+    name,
+    desc,
+    time,
+    cost,
+    address,
+    category
+)
+''')
+conn.commit()
+
+#insert name, desc, time, ccost, address, category
+cursor.execute("INSERT INTO berlin VALUES ('Brandenburg Gate', 'A historic landmark symbolizing peace and unity', '25', '0', 'Pariser Platz', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('East Side Gallery', 'The longest remaining section of the Berlin Wall, adorned with colorful murals.', '75', '0', 'Mühlenstraße 79-81', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Reichstag Building', 'The seat of the German Parliament, offering panoramic views of Berlin.', '200', '0', 'Platz der Republik 1', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Berlin Wall Memorial', 'A poignant reminder of the Cold War division of Berlin.', '150', 'o', 'Bernauer Straße 111', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Museum Island', 'A UNESCO World Heritage Site housing five world-class museums.', '400', '5', 'Museum Island', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Berlin Cathedral', 'A magnificent Baroque cathedral with stunning interior and exterior.', '100', '5', 'Am Lustgarten 4', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Checkpoint Charlie', 'A former border crossing point between East and West Berlin.', '25', '0', 'Friedrichstraße 43-45', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Tiergarten Park', 'A vast urban park with diverse flora, fauna, and historical monuments.', '100', '0', 'Tiergarten', 'nature')")
+cursor.execute("INSERT INTO berlin VALUES ('Berlin TV Tower', 'A striking television tower offering panoramic views of the city.', '200', '15', 'Potsdamer Platz 1', 'family')")
+cursor.execute("INSERT INTO berlin VALUES ('Charlottenburg Palace', 'A magnificent Baroque palace and gardens, once the residence of Prussian royalty.', '300', '10', 'Spandauer Damm 10-22', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Pergamon Museum', 'A world-renowned museum housing ancient artifacts from Greece, Rome, and the Middle East.', '200', '15', 'Bodestraße 1-2', 'family')")
+cursor.execute("INSERT INTO berlin VALUES ('Humboldt Forum', 'A cultural complex dedicated to world cultures, history, and art.', '250', '10', 'Unter den Linden 2', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Berlin Zoo', 'One of the oldest zoos in the world, home to a diverse range of animals.', '250', '15', 'Hahnstraße 13', 'family')")
+cursor.execute("INSERT INTO berlin VALUES ('Viktoriapark', 'A picturesque hilltop park offering stunning views of the city.', '200', '0', 'Kreuzbergstraße 70', 'nature')")
+cursor.execute("INSERT INTO berlin VALUES ('Hackescher Markt', 'A vibrant district with historic courtyards, shops, and restaurants.', '200', '10', 'Rosenthaler Straße 40-41', 'family')")
+cursor.execute("INSERT INTO berlin VALUES ('Bebelplatz', 'A historic square associated with the Nazi book burning of 1933.', '25', '0', 'Bebelplatz', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Gedenkstätte Berliner Mauer', 'A memorial site commemorating the victims of the Berlin Wall.', '100', '0', 'Bernauer Straße 111', 'historical')")
+cursor.execute("INSERT INTO berlin VALUES ('Topographie des Terrors', 'A historical museum dedicated to the history of Nazi terror.', '150', '0', 'Niederkirchnerstraße 8', 'historical')")
+
+cursor.execute("SELECT * FROM berlin")
+ber_sites = cursor.fetchall()
+berlin_sites = []
+conn.close()
+
+
+
+'''Krakow Sites Database'''
+conn_kra = sqlite3.connect('krakow.db')
+cursor_kra = conn_kra.cursor()
+
+# Create a table
+cursor_kra.execute('''
+CREATE TABLE IF NOT EXISTS krakow (
+    name,
+    desc,
+    time,
+    cost,
+    address,
+    category
+)
+''')
+conn_kra.commit()
+
+#insert name, desc, time, ccost, address, category
+cursor_kra.execute("INSERT INTO krakow VALUES ('Main Market Square', 'The heart of the Old Town, surrounded by colorful buildings and historic churches.', '300', '5', 'Rynek Główny 1', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Wawel Castle', 'A majestic royal castle complex overlooking the Vistula River.', '300', '10', 'Wawel 5', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('St. Marys Basilica', 'A Gothic church famous for its distinctive trumpet call.', '200', '5', 'Rynek Główny 1', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Kazimierz District', 'The former Jewish quarter, now a vibrant cultural hub.', '200', '0', 'ul. Miodowa 22', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Planty Park', 'A green belt encircling the Old Town, perfect for leisurely walks.', '200', '0', 'ul. Planty', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Kraków Barbican', 'A fortified gateway to the Old Town.', '100', '0', 'ul. Basztowa 1', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Wieliczka Salt Mine', 'A UNESCO World Heritage Site, a vast network of underground salt chambers.', '300', '0', 'ul. Daniłowicza 20', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Rynek Główny Underground Museum', 'A fascinating museum showcasing the history of the Main Market Square.', '200', '0', 'Rynek Główny 1', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Czartoryski Museum', 'A museum housing a diverse collection of art and historical artifacts.', '200', '0', 'ul. św. Jana 19', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Collegium Maius', 'The oldest building of the Jagiellonian University.', '150', '0', 'ul. Gołębia 24', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('National Museum in Krakow', 'A comprehensive museum with a vast collection of art and artifacts.', '250', '0', 'ul. św. Jana 22', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Kraków Zoological Garden', 'A zoo with a diverse range of animals, including many endangered species.', '200', '0', 'ul. Krasińskiego 9a', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Kopiec Kościuszki', 'A hilltop mound commemorating Tadeusz Kościuszko, a Polish military leader.', '50', '0', 'ul. Kościuszki 1', 'nature')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Błonia Park', 'A large park used for various events and festivals.', '150', '0', 'Błonia', 'nature')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Kraków Philharmonic Hall', 'A beautiful concert hall hosting classical music performances.', '150', '0', 'ul. Zwierzyniecka 1', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('St. Florians Gate', 'A historic gate leading to the Old Town.', '50', '0', 'ul. Floriańska 41', 'historical')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Kraków Main Railway Station', 'A beautiful Art Nouveau railway station.', '75', '0', 'pl. Jana Nowaka-Jeziorańskiego 1', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Smoczy Smok Wawelski', 'A mythical dragon sculpture near Wawel Castle.', '50', '0', 'ul. Wawel 5', 'family')")
+cursor_kra.execute("INSERT INTO krakow VALUES ('Auschwitz-Birkenau Memorial', 'The Auschwitz-Birkenau Memorial and Museum serves as a poignant reminder of the Holocaust.', '300', '0', 'Auschwitz, 32-600 Oświęcim, Poland', 'historical')")
+
+cursor_kra.execute("SELECT * FROM krakow")
+kra_sites = cursor_kra.fetchall()
+krakow_sites = []
+conn_kra.close()
+
+
+
+
+
+'''Amsterdam Sites Database'''
+conn_ams = sqlite3.connect('amsterdam.db')
+cursor_ams = conn_ams.cursor()
+
+# Create a table
+cursor_ams.execute('''
+CREATE TABLE IF NOT EXISTS amsterdam (
+    name,
+    desc,
+    time,
+    cost,
+    address,
+    category
+)
+''')
+conn_ams.commit()
+
+#insert name, desc, time, ccost, address, category
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Rijksmuseum', 'A world-class museum showcasing Dutch art and history.', '200', '0', 'Museumstraat 1', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Anne Frank House', 'A poignant museum dedicated to the life of Anne Frank.', '200', '0', 'Prinsengracht 263-267', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Van Gogh Museum', 'A museum dedicated to the life and work of Vincent van Gogh.', '200', '0', 'Museumplein 6', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Stedelijk Museum', 'A museum of modern and contemporary art.', '150', '0', 'Museumplein 10', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Vondelpark', 'A large urban park with beautiful gardens, ponds, and playgrounds.', '200', '0', 'Overtoom 185', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Dam Square', 'A historic square in the heart of Amsterdam.', '100', '0', 'Dam 1', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Royal Palace', 'A 17th-century palace on Dam Square.', '150', '0', 'Dam 1', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Nieuwe Kerk', 'A medieval church on Dam Square.', '75', '0', 'Dam 9', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Jordaan District', 'A charming neighborhood with canals, historic houses, and trendy shops.', '175', '0', 'Jordaan', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Red Light District', 'A historic district known for its red-lit windows.', '75', '0', 'De Wallen', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Hermitage Amsterdam', 'A branch of the State Hermitage Museum in St. Petersburg.', '150', '0', 'Amstel 51', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('NEMO Science Museum', 'An interactive science museum for all ages.', '200', '0', 'Oosterdok 2', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('ADAM Lookout', 'A panoramic observation deck on top of a former ferry terminal.', '100', '0', 'Overhoeksplein 5', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Bloemenmarkt', 'A floating flower market on the Singel canal.', '100', '0', 'Singel', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Rembrandtplein', 'A lively square with theaters, cinemas, and restaurants.', '125', '0', 'Rembrandtplein', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Waterlooplein', 'A vibrant market square with flea markets and vintage shops.', '125', '0', 'Waterlooplein', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Begijnhof', 'A historic cloister with charming houses and a peaceful atmosphere.', '75', '0', 'Begijnhof', 'family')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Museumplein', 'A square home to several world-class museums.', '200', '0', 'Museumplein', 'historical')")
+cursor_ams.execute("INSERT INTO amsterdam VALUES ('Westerkerk', 'A 17th-century church with a distinctive tower.', '75', '0', 'Prinsengracht 297', 'historical')")
+
+cursor_ams.execute("SELECT * FROM amsterdam")
+ams_sites = cursor_ams.fetchall()
+amsterdam_sites = []
+conn_ams.close()
+
+
+for i in ber_sites:
+    sName = i[0]
+    sDesc = i[1]
+    sTime = i[2]
+    sCost = i[3]
+    sAdd = i[4]
+    sCat = i[5]
+    newsite = site(sName, sDesc, sTime, sCost, sAdd, sCat)
+    berlin_sites.append(newsite)
+
+for i in kra_sites:
+    sName = i[0]
+    sDesc = i[1]
+    sTime = i[2]
+    sCost = i[3]
+    sAdd = i[4]
+    sCat = i[5]
+    newsite = site(sName, sDesc, sTime, sCost, sAdd, sCat)
+    krakow_sites.append(newsite)
+
+for i in ams_sites:
+    sName = i[0]
+    sDesc = i[1]
+    sTime = i[2]
+    sCost = i[3]
+    sAdd = i[4]
+    sCat = i[5]
+    newsite = site(sName, sDesc, sTime, sCost, sAdd, sCat)
+    ams_sites.append(newsite)
+
 def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     '''This function generates a random itinerary for the user.'''
     '''The values here are just placeholder values for the variables. in reality, these will be obtained from the survey. '''
@@ -294,11 +469,13 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     checked = checkboxes
     my_sites = []
     
+    '''Takes the list of cities, and gets the ones with the categories the user wants.'''
     for i in site_list:
         cat = i.get_category()
         if cat in checked:
             my_sites.append(i)
 
+    '''The following statements will randomly select from the list of sites the user would want to see, and puts them into a day, then makes an itinerary. '''
     if days == 1:
         myPickedSites = []
         if busyness == "heavy":
@@ -419,136 +596,12 @@ def generate_itinerary(site_list, daynum, howBusy, checkboxes):
 @bp.route('/makeNewItinerary', methods=['POST'])
 def makeNewItinerary():
     if request.method == 'POST':
+        '''Grab survey inputs'''
         city = request.form['city']
         checked = request.form.getlist('category')
         days = int(request.form['days'])
         busyness = request.form['busyness']
 
-        '''berlin_sites = []
-        empSite = site("Empty Site", "This Site is Empty", 100, 0, "No Address", "historical")
-        num = 100 
-        num2 = 0
-        while num2 < num:
-            berlin_sites.append(empSite)
-            num2 += 1'''
-        
-        berlin_sites = []
-        bbGate = site("Brandenburg Gate", "A historic landmark symbolizing peace and unity.", 25, 0, "Pariser Platz", "historical")
-        berlin_sites.append(bbGate)
-        eastSide = site("East Side Gallery", "The longest remaining section of the Berlin Wall, adorned with colorful murals.", 75, 0, "Mühlenstraße 79-81", "historical")
-        berlin_sites.append(eastSide)
-        reichstag = site("Reichstag Building", "The seat of the German Parliament, offering panoramic views of Berlin.", 200, 0, "Platz der Republik 1", "historical")
-        berlin_sites.append(reichstag)
-        wallMem = site("Berlin Wall Memorial", "A poignant reminder of the Cold War division of Berlin.", 150, 0, "Bernauer Straße 111", "historical")
-        berlin_sites.append(wallMem)
-        musIsl = site("Museum Island", "A UNESCO World Heritage Site housing five world-class museums.", 400, 5, "Museum Island", "historical")
-        berlin_sites.append(musIsl)
-        berCat = site("Berlin Cathedral", "A magnificent Baroque cathedral with stunning interior and exterior.", 100, 5, "Am Lustgarten 4", "historical")
-        berlin_sites.append(berCat)
-        charlie = site("Checkpoint Charlie", "A former border crossing point between East and West Berlin.", 25, 0, "Friedrichstraße 43-45", "historical")
-        berlin_sites.append(charlie)
-        tier = site("Tiergarten Park", "A vast urban park with diverse flora, fauna, and historical monuments.", 100, 0, "Tiergarten", "nature")
-        berlin_sites.append(tier)
-        tv = site("Berlin TV Tower", "A striking television tower offering panoramic views of the city.", 2, 15, "Potsdamer Platz 1", "family")
-        berlin_sites.append(tv)
-        char = site("Charlottenburg Palace", "A magnificent Baroque palace and gardens, once the residence of Prussian royalty.", 3, 10, "Spandauer Damm 10-22", "historical")
-        berlin_sites.append(char)
-        per = site("Pergamon Museum", "A world-renowned museum housing ancient artifacts from Greece, Rome, and the Middle East.", 3, 15, "Bodestraße 1-2", "family")
-        berlin_sites.append(per)
-        hum = site("Humboldt Forum", "A cultural complex dedicated to world cultures, history, and art.", 3, 10, "Unter den Linden 2", "historical")
-        berlin_sites.append(hum)
-        zoo = site("Berlin Zoo", "One of the oldest zoos in the world, home to a diverse range of animals.", 3, 15, "Hahnstraße 13", "family")
-        berlin_sites.append(zoo)
-        vik = site("Viktoriapark", "A picturesque hilltop park offering stunning views of the city.", 2, 0, "Kreuzbergstraße 70", "nature")
-        berlin_sites.append(vik)
-        hack = site("Hackescher Markt", "A vibrant district with historic courtyards, shops, and restaurants.", 2, 10, "Rosenthaler Straße 40-41", "family")
-        berlin_sites.append(hack)
-        bebl = site("Bebelplatz", "A historic square associated with the Nazi book burning of 1933.", 1, 0, "Bebelplatz", 'historical')
-        berlin_sites.append(bebl)
-        gede = site("Gedenkstätte Berliner Mauer", "A memorial site commemorating the victims of the Berlin Wall.", 2, 0, "Bernauer Straße 111", "historical")
-        berlin_sites.append(gede)
-        topo = site("Topographie des Terrors", "A historical site dedicated to the history of Nazi terror.", 2, 0, "Niederkirchnerstraße 8", "historical")
-        berlin_sites.append(topo)
-    
-
-        krakow_sites = []
-        newSite = site("Main Market Square", "The heart of Krakow's Old Town, surrounded by colorful buildings and historic churches.", 300, 5, "Rynek Główny 1", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Wawel Castle", "A majestic royal castle complex overlooking the Vistula River.", 300, 10, "ul. Wawel 5", "family")
-        krakow_sites.append(newSite)
-        newSite = site("St. Mary's Basilica", "A Gothic church famous for its distinctive trumpet call.", 200, 5, "Rynek Główny 1", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Kazimierz District", "The former Jewish quarter, now a vibrant cultural hub.", 300, 10, "ul. Miodowa 22", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Planty Park", "A green belt encircling the Old Town, perfect for leisurely walks.", 200, 0, "ul. Planty", "family")
-        krakow_sites.append(newSite)
-        newSite = site("Kraków Barbican", "A fortified gateway to the Old Town.", 100, 0, "ul. Basztowa 1", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Wieliczka Salt Mine", "A UNESCO World Heritage Site, a vast network of underground salt chambers.", 500, 30, "ul. Daniłowicza 20", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Rynek Główny Underground Museum", "A fascinating museum showcasing the history of Krakow's Main Market Square.", 200, 10, "Rynek Główny 1", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Czartoryski Museum", "A museum housing a diverse collection of art and historical artifacts.", 300, 10, "ul. św. Jana 19", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Collegium Maius", "The oldest building of the Jagiellonian University.", 200, 5, "ul. Gołębia 24", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("National Museum in Krakow", "A comprehensive museum with a vast collection of art and artifacts.", 300, 10, "ul. św. Jana 22", "family")
-        krakow_sites.append(newSite)
-        newSite = site("Kraków Zoological Garden", "A zoo with a diverse range of animals, including many endangered species.", 300, 15, "ul. Krasińskiego 9a", "family")
-        krakow_sites.append(newSite)
-        newSite = site("Kopiec Kościuszki", "A hilltop mound commemorating Tadeusz Kościuszko, a Polish military leader.", 200, 0, "ul. Kościuszki 1", "nature")
-        krakow_sites.append(newSite)
-        newSite = site("Błonia Park", "A large park used for various events and festivals.", 200, 0, "Błonia", "nature")
-        krakow_sites.append(newSite)
-        newSite = site("Kraków Philharmonic Hall", "A beautiful concert hall hosting classical music performances.", 200, 10, "ul. Zwierzyniecka 1", "family")
-        krakow_sites.append(newSite)
-        newSite = site("St. Florian's Gate", "A historic gate leading to the Old Town.", 100, 0, "ul. Floriańska 41", "historical")
-        krakow_sites.append(newSite)
-        newSite = site("Kraków Main Railway Station", "A beautiful Art Nouveau railway station.", 100, 0, "pl. Jana Nowaka-Jeziorańskiego 1", "family")
-        krakow_sites.append(newSite)
-        newSite = site("Smoczy Smok Wawelski", "A mythical dragon sculpture near Wawel Castle.", 100, 0, "ul. Wawel 5", "family")
-        krakow_sites.append(newSite)
-        
-
-        amsterdam_sites = []
-        newSite = site("Rijksmuseum", "A world-class museum showcasing Dutch art and history.", 400, 20, "Museumstraat 1", "historical")
-        amsterdam_sites.append(newSite)
-        newSite = site("Anne Frank House", "A poignant museum dedicated to the life of Anne Frank.", 300, 15, "Prinsengracht 263-267", "historical")
-        amsterdam_sites.append(newSite)
-        newSite = site("Van Gogh Museum", "A museum dedicated to the life and work of Vincent van Gogh.", 300, 15, "Museumplein 6", 'historical')
-        amsterdam_sites.append(newSite)
-        newSite = site("Stedelijk Museum", "A museum of modern and contemporary art.", 300, 10, "Museumplein 10", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Vondelpark", "A large urban park with beautiful gardens, ponds, and playgrounds.", 200, 0, "Overtoom 185", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Dam Square", "A historic square in the heart of Amsterdam.", 200, 5, "Dam 1", 'historical')
-        amsterdam_sites.append(newSite)
-        newSite = site("Royal Palace", "A 17th-century palace on Dam Square.", 200, 10, "Dam 1", 'historical')
-        amsterdam_sites.append(newSite)
-        newSite = site("Nieuwe Kerk", "A medieval church on Dam Square.", 200, 5, "Dam 9", "family")
-        amsterdam_sites.append(newSite)
-        newSite = site("Jordaan District", "A charming neighborhood with canals, historic houses, and trendy shops.", 200, 5, "Jordaan", "historical")
-        amsterdam_sites.append(newSite)
-        newSite = site("Red Light District", "A historic district known for its red-lit windows.", 100, 5, "De Wallen", 'historical')
-        amsterdam_sites.append(newSite)
-        newSite = site("Hermitage Amsterdam", "A branch of the State Hermitage Museum in St. Petersburg.", 300, 15, "Amstel 51", 'historical')
-        amsterdam_sites.append(newSite)
-        newSite = site("NEMO Science Museum", "An interactive science museum for all ages.", 300, 10, "Oosterdok 2", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("A'DAM Lookout", "A panoramic observation deck on top of a former ferry terminal.", 200, 15, "Overhoeksplein 5", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Bloemenmarkt", "A floating flower market on the Singel canal.", 100, 5, "Singel", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Rembrandtplein", "A lively square with theaters, cinemas, and restaurants.", 200, 10, "Rembrandtplein", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Waterlooplein", "A vibrant market square with flea markets and vintage shops.", 200, 5, "Waterlooplein", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Begijnhof", "A historic cloister with charming houses and a peaceful atmosphere.", 100, 0, "Begijnhof", 'family')
-        amsterdam_sites.append(newSite)
-        newSite = site("Museumplein", "A square home to several world-class museums.", 200, 0, "Museumplein", 'historical')
-        amsterdam_sites.append(newSite)
-        newSite = site("Westerkerk", "A 17th-century church with a distinctive tower.", 100, 0, "Prinsengracht 297", 'historical')
-        amsterdam_sites.append(newSite)
         if city == "berlin":
             createdItinerary = generate_itinerary(berlin_sites, days, busyness, checked)
             itin = createdItinerary.printFullItinerary()
