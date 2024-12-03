@@ -430,6 +430,81 @@ amsterdam_sites = []
 conn_ams.close()
 
 
+
+
+
+
+
+
+'''Venice Sites Database'''
+conn_ven = sqlite3.connect('venice.db')
+cursor_ven = conn_ven.cursor()
+
+# Create a table
+cursor_ven.execute('''
+CREATE TABLE IF NOT EXISTS venice (
+    name,
+    desc,
+    time,
+    cost,
+    address,
+    category
+)
+''')
+conn_ven.commit()
+
+#insert name, desc, time, ccost, address, category
+cursor_ven.execute("INSERT INTO venice VALUES ('Campo Santa Maria Formosa', 'A charming square with a beautiful church and lively atmosphere.', '50', '0', 'Castello, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Campo San Stefano', 'A beautiful square with four churches, offering a glimpse of Venetian history.', '75', '0', 'Castello, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Fondamenta della Misericordia', 'A picturesque street with stunning views of the Grand Canal.', '50', '0', 'Dorsoduro, Venice', 'family')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Scuola Grande di San Marco', 'A former charitable institution with a beautiful facade and interior.', '100', '0', 'San Marco, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Jewish Ghetto', 'A historic neighborhood with synagogues and a museum.', '125', '0', 'Cannaregio, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Arsenale', 'A historic shipyard once used to build Venetian galleys.', '100', '0', 'Castello, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Punta della Dogana', 'A contemporary art museum with stunning views of the Grand Canal.', '150', '0', 'Dorsoduro, Venice', 'family')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Palazzo Grassi', 'A contemporary art museum showcasing international exhibitions.', '150', '0', 'San Marco, Venice', 'family')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Querini Stampalia Foundation', 'A cultural institution with a library, art gallery, and historical archives.', '150', '0', 'San Marco, Venice', 'historical');")
+cursor_ven.execute("INSERT INTO venice VALUES ('Peggy Guggenheim Collection', 'A museum showcasing modern and contemporary art, including works by Picasso, Pollock, and Dalí.', '150', '0', 'Dorsoduro, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Libreria Acqua Alta', 'A unique bookstore with books displayed in gondolas and bathtubs.', '50', '0', 'Dorsoduro, Venice', 'family')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Campo San Polo', 'The second-largest square in Venice, often hosting markets and events.', '50', '0', 'San Polo, Venice', 'family')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Campo Santa Margherita', 'A lively square with numerous bars, restaurants, and shops.', '125', '0', 'Dorsoduro, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Teatro La Fenice', 'A historic opera house, often hosting world-class performances.', '100', '0', 'San Marco, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('San Giorgio Maggiore', 'A Benedictine monastery with a beautiful church and stunning views of Venice.', '100', '0', 'San Giorgio Maggiore, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Basilica di Santa Maria della Salute', 'A magnificent Baroque church offering stunning views of the Grand Canal.', '75', '0', 'Dorsoduro, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Ca Rezzonico', 'A Baroque palace showcasing 18th-century Venetian life and art.', '100', '0', 'Dorsoduro, Venice', 'family')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Ca dOro', 'A Gothic palace with a beautiful facade and a collection of Renaissance art.', '125', '0', 'Cannaregio, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Scuola Grande di San Rocco', 'A stunning Renaissance building with a magnificent collection of Tintoretto paintings.', '125', '0', 'Campo San Rocco, Venice', 'Art Gallery')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Rialto Market', 'A bustling market offering fresh produce, seafood, and souvenirs.', '75', '0', 'Rialto, Venice', 'Market')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Torcello Island', 'A peaceful island with ancient Byzantine mosaics and a serene atmosphere.', 'Half-day', '0', 'Torcello, Venice', 'Island')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Burano Island', 'A colorful island known for its lace-making and vibrant houses.', '400', '0', 'Burano, Venice', 'nature')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Murano Glass Factory', 'Witness the centuries-old tradition of glassblowing on the island of Murano.', '125', '0', 'Murano, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Gallerie dellAccademia', 'A world-class art museum showcasing Venetian paintings from the 14th to 18th centuries.', '150', '0', 'Campo della Carità, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Bridge of Sighs', 'A romantic bridge connecting the Doges Palace to the Prigioni, offering a unique perspective of Venice.', '25', '0', 'Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Grand Canal', 'The main waterway of Venice, lined with stunning palaces and churches.', '50', '0', 'Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Rialto Bridge', 'A historic bridge spanning the Grand Canal, offering beautiful views.', '50', '0', 'Rialto, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('St. Marks Basilica', 'A stunning Byzantine cathedral with golden mosaics and intricate details.', '125', '0', 'Piazza San Marco, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('Doges Palace', 'A magnificent palace overlooking St. Marks Square, once the seat of Venetian power.', '150', '0', 'Piazza San Marco, Venice', 'historical')")
+cursor_ven.execute("INSERT INTO venice VALUES ('St. Marks Square', 'The heart of Venice, with St. Marks Basilica, Doges Palace, and Campanile.', '50', '0', 'Piazza San Marco, Venice', 'historical')")
+
+cursor_ven.execute("SELECT * FROM venice")
+ven_sites = cursor_ven.fetchall()
+venice_sites = []
+conn_ven.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 for i in ber_sites:
     sName = i[0]
     sDesc = i[1]
@@ -459,6 +534,16 @@ for i in ams_sites:
     sCat = i[5]
     newsite = site(sName, sDesc, sTime, sCost, sAdd, sCat)
     amsterdam_sites.append(newsite)
+
+for i in ven_sites:
+    sName = i[0]
+    sDesc = i[1]
+    sTime = i[2]
+    sCost = i[3]
+    sAdd = i[4]
+    sCat = i[5]
+    newsite = site(sName, sDesc, sTime, sCost, sAdd, sCat)
+    venice_sites.append(newsite)
 
 def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     '''This function generates a random itinerary for the user.'''
@@ -612,6 +697,10 @@ def makeNewItinerary():
 
         elif city == "amsterdam":
             createdItinerary = generate_itinerary(amsterdam_sites, days, busyness, checked)
+            itin = createdItinerary.printFullItinerary()
+
+        elif city == "venice":
+            createdItinerary = generate_itinerary(venice_sites, days, busyness, checked)
             itin = createdItinerary.printFullItinerary()
 
         return render_template('itinerary.html', itin=itin)
