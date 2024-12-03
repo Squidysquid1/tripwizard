@@ -152,17 +152,17 @@ class day():
         '''Leave hotel: Start of Day'''
         time = 850
         happening = str(self.time_converter(time))
-        happening += "\t\t"
-        happening += "Leave Hotel and go to " + self.__s1.get_name() + ". \n"
+        happening += "\t"
+        happening += "Leave Hotel and go to " + self.__s1.get_name() + ". \n\n"
         time += 50
 
         '''Arrive at Site 1'''
         happening += str(self.time_converter(time))
-        happening += "\nArrive at " + self.__s1.get_name() + ". \n"
+        happening += "\tArrive at " + self.__s1.get_name() + ". \n\t\t"
         s1desc = self.__s1.get_desc()
-        happening += s1desc
+        happening += s1desc + "\n\t\t"
         '''Display Address so user can get the route'''
-        happening += " Address: "
+        happening += "Address: "
         s1address = self.__s1.get_address()
         happening += s1address
         happening += "\n\n"
@@ -171,15 +171,15 @@ class day():
 
         '''Leave Site 1, go to Site 2'''
         happening += str(self.time_converter(time))
-        happening += "\nLeave " + self.__s1.get_name() + " and go to " + self.__s2.get_name() + ". \n"
+        happening += "\tLeave " + self.__s1.get_name() + " and go to " + self.__s2.get_name() + ". \n\n"
         time += 50
 
         '''Arrive at Site 2'''
         happening += str(self.time_converter(time))
-        happening += "\nArrive at " + self.__s2.get_name() + ". \n"
+        happening += "\tArrive at " + self.__s2.get_name() + ". \n\t\t"
         s2desc = self.__s2.get_desc()
-        happening += s2desc
-        happening += " Address: "
+        happening += s2desc + "\n\t\t"
+        happening += "Address: "
         s2address = self.__s2.get_address()
         happening += s2address
         happening += "\n\n"
@@ -189,15 +189,15 @@ class day():
         if self.__s3 != 0:
             '''Leave Site 2, go to Site 3'''
             happening += str(self.time_converter(time))
-            happening += "\nLeave " + self.__s2.get_name() + " and go to " + self.__s3.get_name() + ". \n"
+            happening += "\tLeave " + self.__s2.get_name() + " and go to " + self.__s3.get_name() + ". \n\n"
             time += 50
 
             '''Arrive at Site 3'''
             happening += str(self.time_converter(time))
-            happening += "\nArrive at " + self.__s3.get_name() + ". \n"
+            happening += "\tArrive at " + self.__s3.get_name() + ". \n\t\t"
             s3desc = self.__s3.get_desc()
-            happening += s3desc
-            happening += " Address: "
+            happening += s3desc + "\n\t\t"
+            happening += "Address: "
             s3address = self.__s3.get_address()
             happening += s3address
             happening += "\n\n"
@@ -207,15 +207,15 @@ class day():
             if self.__s4 != 0:
                 '''Leave Site 3, go to Site 4'''
                 happening += str(self.time_converter(time))
-                happening += "\nLeave " + self.__s3.get_name() + " and go to " + self.__s4.get_name() + ". \n"
+                happening += "\tLeave " + self.__s3.get_name() + " and go to " + self.__s4.get_name() + ". \n\n"
                 time += 50
 
                 '''Arrive at Site 4'''
                 happening += str(self.time_converter(time))
-                happening += "\nArrive at " + self.__s4.get_name() + ". \n"
+                happening += "\tArrive at " + self.__s4.get_name() + ". \n\t\t"
                 s4desc = self.__s4.get_desc()
-                happening += s4desc
-                happening += " Address: "
+                happening += s4desc + "\n\t\t"
+                happening += "Address: "
                 s4address = self.__s4.get_address()
                 happening += s4address
                 happening += "\n\n"
@@ -225,15 +225,15 @@ class day():
                 if self.__s5 != 0:
                     '''Leave Site 4, go to Site 5'''
                     happening += str(self.time_converter(time))
-                    happening += "\nLeave " + self.__s4.get_name() + " and go to " + self.__s5.get_name() + ". \n"
+                    happening += "\tLeave " + self.__s4.get_name() + " and go to " + self.__s5.get_name() + ". \n\n"
                     time += 50
 
                     '''Arrive at Site 5'''
                     happening += str(self.time_converter(time))
-                    happening += "\nArrive at " + self.__s5.get_name() + ". \n"
+                    happening += "\tArrive at " + self.__s5.get_name() + ". \n\t\t"
                     s5desc = self.__s5.get_desc()
-                    happening += s5desc
-                    happening += " Address: "
+                    happening += s5desc + "\n\t\t"
+                    happening += "Address: "
                     s5address = self.__s5.get_address()
                     happening += s5address
                     happening += "\n\n"
@@ -243,15 +243,15 @@ class day():
                     if self.__s6 != 0:
                         '''Leave Site 5, go to Site 6'''
                         happening += str(self.time_converter(time))
-                        happening += "\nLeave " + self.__s6.get_name() + " and go to " + self.__s6.get_name() + ". \n"
+                        happening += "\tLeave " + self.__s6.get_name() + " and go to " + self.__s6.get_name() + ". \n\n"
                         time += 50
 
                         '''Arrive at Site 6'''
                         happening += str(self.time_converter(time))
-                        happening += "\nArrive at " + self.__s6.get_name() + ". \n"
+                        happening += "\tArrive at " + self.__s6.get_name() + ". \n\t\t"
                         s6desc = self.__s6.get_desc()
-                        happening += s6desc
-                        happening += " Address: "
+                        happening += s6desc + "\n\t\t"
+                        happening += "Address: "
                         s6address = self.__s6.get_address()
                         happening += s6address
                         happening += "\n\n"
@@ -275,19 +275,19 @@ class itinerary():
         self.__d4 = day4
 
     def printFullItinerary(self):
-        str = "Day 1: "
+        str = "Day 1: \n\n"
         d1full = self.__d1.fullDayInformation()
         str += d1full
         if self.__d2 != 0:
-            str += "\n\nDay 2: \n"
+            str += "\n\nDay 2: \n\n"
             d2full = self.__d2.fullDayInformation()
             str += d2full
             if self.__d3 != 0:
-                str += "\n\nDay 3: \n"
+                str += "\n\nDay 3: \n\n"
                 d3full = self.__d3.fullDayInformation()
                 str += d3full
                 if self.__d4 != 0:
-                    str += "\n\nDay 4: \n"
+                    str += "\n\nDay 4: \n\n"
                     d4full = self.__d4.fullDayInformation()
                     str += d4full
         else:
@@ -458,7 +458,7 @@ for i in ams_sites:
     sAdd = i[4]
     sCat = i[5]
     newsite = site(sName, sDesc, sTime, sCost, sAdd, sCat)
-    ams_sites.append(newsite)
+    amsterdam_sites.append(newsite)
 
 def generate_itinerary(site_list, daynum, howBusy, checkboxes):
     '''This function generates a random itinerary for the user.'''
