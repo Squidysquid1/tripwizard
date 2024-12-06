@@ -1,5 +1,7 @@
 PRAGMA foreign_keys = 1;
 
+-- We didn't end up using this, but this was written by Jason
+
 DROP TABLE IF EXISTS `City`;
 CREATE TABLE `City` (
   id INTEGER PRIMARY KEY AUTOINCREMENT,

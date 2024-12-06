@@ -1,6 +1,8 @@
 import functools
 import random
 
+'''The code that used to be here was written by Anita, before we ditched the account feature because we wanted to focus on other parts. '''
+
 from flask import Blueprint
 from flask import flash
 from flask import g
@@ -15,20 +17,4 @@ import random
 from .Database import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
-
-
-'''@bp.route("/survey", methods=("GET", "POST"))
-def generate_itinerary():
-   country = request.form.get('country')
-   city = request.form.get('city')
-   days = request.form.get('days')
-   categories = request.form.getlist('category')
-   busyness = request.form.get('busyness')
-
-   # Implement the logic to generate itinerary based on inputs
-   itinerary = create_itinerary(country, city, days, categories, busyness)
-
-   return render_template('itinerary.html', itinerary=itinerary)'''
-
-
 

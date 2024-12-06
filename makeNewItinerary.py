@@ -2,6 +2,8 @@ from flask import Flask, request, render_template
 import random
 from flask import Blueprint
 import sqlite3
+'''Most code done by Jon, databases done by Anita'''
+
 
 '''Blueprint'''
 bp = Blueprint("survey", __name__)
